@@ -1,10 +1,13 @@
 //#define ROTATE_CAMERA
 #define ROTATE_MOVEMENT
+using System.Collections;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody))]
 public class PlayerMovementScript : MonoBehaviour
 {
     #region Variables
+    private Rigidbody m_Rigidbody;
     private PlayerController m_PlayerController;
     private Transform m_CameraTransform;
 
@@ -14,9 +17,12 @@ public class PlayerMovementScript : MonoBehaviour
 
     [Header("Jump")]
     [SerializeField] private float m_JumpForce = 8f;
-    public bool m_CanJump;
+    [SerializeField] private float m_CoyoteTime = 0.5f;
+    [SerializeField] private float m_JumpBufferTime = 0.5f;
     public bool m_CoyoteTimeActive;
     public bool m_JumpBuffered;
+    private float m_CoyoteTimeCounter;
+    private float m_JumpBufferCounter;
 
     [Header("Rotation")]
     [SerializeField] private float m_RotationSpeed = 40f;
@@ -27,6 +33,7 @@ public class PlayerMovementScript : MonoBehaviour
     #region Main Methods
     void Start()
     {
+        m_Rigidbody = GetComponent<Rigidbody>();
         m_PlayerController = GetComponent<PlayerController>();
         m_CameraTransform = Camera.main.transform;
     }
@@ -35,6 +42,8 @@ public class PlayerMovementScript : MonoBehaviour
     {
         IsGrounded = Physics.Raycast(transform.position, Vector3.down, 1.1f);
 
+        HandleCoyoteTime();
+        HandleJumpBuffer();
         HandleJump();
     }
 
@@ -57,9 +66,9 @@ public class PlayerMovementScript : MonoBehaviour
         Vector3 moveDirection = m_CameraTransform.right.normalized * inputMovement.x +
             m_CameraTransform.forward.normalized * inputMovement.y;
 
-        m_PlayerController.m_Rigidbody.linearVelocity = new Vector3(
+        m_Rigidbody.linearVelocity = new Vector3(
             moveDirection.x * currentSpeed, 
-            m_PlayerController.m_Rigidbody.linearVelocity.y,
+            m_Rigidbody.linearVelocity.y,
             moveDirection.z * currentSpeed);
     }
 
@@ -95,22 +104,84 @@ public class PlayerMovementScript : MonoBehaviour
 
     private void HandleJump()
     {
-        if (IsGrounded && m_PlayerController.m_InputManager.m_JumpPressed)
+        if (m_CoyoteTimeActive && m_JumpBuffered)
         {
-            m_PlayerController.m_Rigidbody.AddForce(Vector3.up * m_JumpForce, ForceMode.Impulse);
+            m_JumpBufferCounter = 0;
+
+            m_Rigidbody.linearVelocity = new Vector3(
+                m_Rigidbody.linearVelocity.x,
+                0,
+                m_Rigidbody.linearVelocity.z);
+
+            if (m_PlayerController.m_InputManager.m_JumpHeld)
+            {
+                m_Rigidbody.AddForce(Vector3.up * m_JumpForce, ForceMode.Impulse);
+            }
+            else
+            {
+                m_Rigidbody.AddForce(0.5f * m_JumpForce * Vector3.up, ForceMode.Impulse);
+            }
+                
         }
 
-        if (m_PlayerController.m_InputManager.m_JumpReleased && m_PlayerController.m_Rigidbody.linearVelocity.y > 0)
+        if (m_PlayerController.m_InputManager.m_JumpReleased && m_Rigidbody.linearVelocity.y > 0)
         {
-            m_PlayerController.m_Rigidbody.linearVelocity = new Vector3(
-                m_PlayerController.m_Rigidbody.linearVelocity.x,
-                m_PlayerController.m_Rigidbody.linearVelocity.y * 0.5f,
-                m_PlayerController.m_Rigidbody.linearVelocity.z);
+            m_CoyoteTimeCounter = 0;
+
+            m_Rigidbody.linearVelocity = new Vector3(
+                m_Rigidbody.linearVelocity.x,
+                m_Rigidbody.linearVelocity.y * 0.5f,
+                m_Rigidbody.linearVelocity.z);
+        }
+    }
+
+    private void HandleCoyoteTime()
+    {
+        if (IsGrounded)
+        {
+            m_CoyoteTimeCounter = m_CoyoteTime;
+        }
+        else
+        {
+            m_CoyoteTimeCounter -= Time.deltaTime;
+        }
+
+
+        if (m_CoyoteTimeCounter > 0)
+        {
+            m_CoyoteTimeActive = true;
+        }
+        else
+        {
+            m_CoyoteTimeCounter = 0;
+            m_CoyoteTimeActive = false;
+        }
+    }
+
+    private void HandleJumpBuffer()
+    {
+        if (m_PlayerController.m_InputManager.m_JumpPressed)
+        {
+            m_JumpBufferCounter = m_JumpBufferTime;
+        }
+        else
+        {
+            m_JumpBufferCounter -= Time.deltaTime;
+        }
+
+        if (m_JumpBufferCounter > 0)
+        {
+            m_JumpBuffered = true;
+        }
+        else
+        {
+            m_JumpBufferCounter = 0;
+            m_JumpBuffered = false;
         }
     }
     #endregion
 
     #region Helper Methods
-
+    
     #endregion
 }

@@ -888,8 +888,16 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 246184483150683152, guid: ff084e4bb157534408dc55adf64c2686, type: 3}
+      propertyPath: m_CoyoteTime
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 246184483150683152, guid: ff084e4bb157534408dc55adf64c2686, type: 3}
       propertyPath: m_CoyoteTimer
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 246184483150683152, guid: ff084e4bb157534408dc55adf64c2686, type: 3}
+      propertyPath: m_JumpBufferTime
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 246184483150683152, guid: ff084e4bb157534408dc55adf64c2686, type: 3}
       propertyPath: m_JumpBufferTimer

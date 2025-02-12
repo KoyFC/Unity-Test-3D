@@ -11,8 +11,6 @@ public class PlayerController : MonoBehaviour
     internal HealthScript m_HealthScript;
     internal PlayerMovementScript m_MovementScript;
     internal PlayerInputManager m_InputManager;
-
-    internal Rigidbody m_Rigidbody;
     #endregion
 
     #region Main Methods
@@ -34,8 +32,6 @@ public class PlayerController : MonoBehaviour
         m_HealthScript = GetComponent<HealthScript>();
         m_MovementScript = GetComponent<PlayerMovementScript>();
         m_InputManager = GetComponent<PlayerInputManager>();
-
-        m_Rigidbody = GetComponent<Rigidbody>();
     }
     #endregion
 }
