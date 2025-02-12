@@ -9,6 +9,7 @@ public class PlayerInputManager : MonoBehaviour
     internal Vector2 m_Movement;
     internal Vector2 m_Look;
     internal bool m_JumpPressed;
+    internal bool m_JumpReleased;
     internal bool m_SprintHeld;
     
     void Start()
@@ -26,6 +27,7 @@ public class PlayerInputManager : MonoBehaviour
         m_Movement = m_PlayerInput.actions["Move"].ReadValue<Vector2>();
         m_Look = m_PlayerInput.actions["Look"].ReadValue<Vector2>();
         m_JumpPressed = m_PlayerInput.actions["Jump"].WasPressedThisFrame();
+        m_JumpReleased = m_PlayerInput.actions["Jump"].WasReleasedThisFrame();
         m_SprintHeld = m_PlayerInput.actions["Sprint"].IsPressed();
     }
 }

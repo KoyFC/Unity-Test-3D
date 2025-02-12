@@ -16,9 +16,15 @@ public class PlayerController : MonoBehaviour
     #endregion
 
     #region Main Methods
-    private void Awake()
+    void Awake()
     {
         GetAllComponents();
+    }
+
+    private void Start()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
     #endregion
 
