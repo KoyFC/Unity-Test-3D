@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(HealthScript))]
 [RequireComponent(typeof(PlayerMovementScript))]
@@ -19,11 +18,6 @@ public class PlayerController : MonoBehaviour
         GetAllComponents();
     }
 
-    private void Start()
-    {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-    }
     #endregion
 
     #region Helper Methods

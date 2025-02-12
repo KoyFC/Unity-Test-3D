@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class HealthScript : MonoBehaviour
@@ -16,9 +17,11 @@ public class HealthScript : MonoBehaviour
     [Header("Invincibility")]
     private Color m_OriginalColor;
     [SerializeField] private Color m_FlashingColor = Color.white;
+    [SerializeField][Min(0)] private int m_FlashCount = 3;
     [SerializeField][Min(0)] private float m_FlashDuration = 0.1f;
     [SerializeField][Min(0)] private float m_InvincibilityTime = 0.5f;
-    
+    private bool m_IsInvincible;
+
     void Start()
     {
         m_CurrentHealth = m_StartingHealth;
@@ -32,6 +35,12 @@ public class HealthScript : MonoBehaviour
         {
             m_StartRegen = false;
             Invoke(nameof(RegenHealth), m_RegenDelay);
+        }
+
+        if (m_CurrentHealth <= 0)
+        {
+            Debug.Log(name + " is dead!");
+            Destroy(gameObject, 0.5f);
         }
     }
     
@@ -50,5 +59,42 @@ public class HealthScript : MonoBehaviour
 
         m_CurrentHealth += m_RegenRate;
         m_CurrentHealth = Mathf.Clamp(m_CurrentHealth, 0, m_MaxHealth);
+    }
+
+    public void TakeDamage(int damage)
+    {
+        if (!m_IsInvincible)
+        {
+            Debug.Log("Ouch! " + name + " took " + damage + " damage!");
+            Debug.Log("Health: " + m_CurrentHealth + " -> " + (m_CurrentHealth - damage));
+
+            m_CurrentHealth -= damage;
+
+            StartCoroutine(InvincibleAfterHit());
+        }
+        else
+        {
+            Debug.Log(name + " is invincible right now! No damage was dealt.");
+        }
+    }
+
+    private IEnumerator InvincibleAfterHit()
+    {
+        m_IsInvincible = true;
+        StartCoroutine(Flash());
+        yield return new WaitForSeconds(m_InvincibilityTime);
+        m_IsInvincible = false;
+    }
+
+    private IEnumerator Flash()
+    {
+        Renderer renderer = GetComponent<Renderer>();
+        for (int i = 0; i < m_FlashCount; i++)
+        {
+            renderer.material.color = m_FlashingColor;
+            yield return new WaitForSeconds(m_FlashDuration);
+            renderer.material.color = m_OriginalColor;
+            yield return new WaitForSeconds(m_FlashDuration);
+        }
     }
 }

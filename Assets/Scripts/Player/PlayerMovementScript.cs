@@ -1,5 +1,9 @@
-//#define ROTATE_CAMERA
+#define SHIFT_LOCK
+#define ROTATE_CAMERA
+#define ROTATE_MOVEMENT
+#define ROTATE_AIM
 using System.Collections;
+using Unity.Cinemachine;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
@@ -18,13 +22,15 @@ public class PlayerMovementScript : MonoBehaviour
     [SerializeField] private float m_JumpForce = 8f;
     [SerializeField] private float m_CoyoteTime = 0.5f;
     [SerializeField] private float m_JumpBufferTime = 0.5f;
-    public bool m_CoyoteTimeActive;
-    public bool m_JumpBuffered;
+    private bool m_CoyoteTimeActive;
+    private bool m_JumpBuffered;
 
     [Header("Rotation")]
     [SerializeField] private float m_RotationSpeed = 40f;
+    internal bool ShiftLock { get; set; }
 
     private bool IsGrounded { get; set; }
+
     #endregion
 
     #region Main Methods
@@ -33,6 +39,9 @@ public class PlayerMovementScript : MonoBehaviour
         m_Rigidbody = GetComponent<Rigidbody>();
         m_PlayerController = GetComponent<PlayerController>();
         m_CameraTransform = Camera.main.transform;
+
+        Cursor.lockState = ShiftLock ? CursorLockMode.Locked : CursorLockMode.None;
+        Cursor.visible = !ShiftLock;
     }
 
     private void Update()
@@ -47,6 +56,23 @@ public class PlayerMovementScript : MonoBehaviour
         if (m_PlayerController.m_InputManager.m_JumpPressed && !m_JumpBuffered)
         {
             StartCoroutine(JumpBufferCoroutine());
+        }
+
+        if (m_PlayerController.m_InputManager.m_ShiftLockPressed)
+        {
+            ShiftLock = !ShiftLock;
+
+            Cursor.lockState = ShiftLock ? CursorLockMode.Locked : CursorLockMode.None;
+            Cursor.visible = !ShiftLock;
+        }
+
+        if (ShiftLock)
+        {
+            
+        }
+        else
+        {
+            
         }
 
         HandleJump();
@@ -79,16 +105,45 @@ public class PlayerMovementScript : MonoBehaviour
 
     private void HandleRotation()
     {
-#if ROTATE_CAMERA
+#if SHIFT_LOCK
+        if (ShiftLock)
+        {
+            Vector3 cameraDirection = m_CameraTransform.forward;
+            cameraDirection.y = 0;
+
+            transform.rotation = Quaternion.RotateTowards(
+                transform.rotation,
+                Quaternion.LookRotation(cameraDirection),
+                1.5f * m_RotationSpeed * Time.deltaTime);
+        }
+        else
+        {
+            Vector2 inputMovement = m_PlayerController.m_InputManager.m_Movement;
+
+            // Rotating based on the movement input
+            Vector3 rotateDirection = m_CameraTransform.right.normalized * inputMovement.x +
+                m_CameraTransform.forward.normalized * inputMovement.y;
+
+            rotateDirection.y = 0;
+
+            if (inputMovement != Vector2.zero)
+            {
+                transform.rotation = Quaternion.RotateTowards(
+                    transform.rotation,
+                    Quaternion.LookRotation(rotateDirection),
+                    2 * m_RotationSpeed * Time.deltaTime);
+            }
+        }
+#elif ROTATE_CAMERA              
         Vector3 cameraDirection = m_CameraTransform.forward;
         cameraDirection.y = 0;
 
         transform.rotation = Quaternion.RotateTowards(
             transform.rotation, 
             Quaternion.LookRotation(cameraDirection), 
-            m_RotationSpeed * Time.deltaTime);
+            1.5f * m_RotationSpeed * Time.deltaTime);
 
-#else
+#elif ROTATE_MOVEMENT
         Vector2 inputMovement = m_PlayerController.m_InputManager.m_Movement;
 
         // Rotating based on the movement input
@@ -104,6 +159,9 @@ public class PlayerMovementScript : MonoBehaviour
                 Quaternion.LookRotation(rotateDirection),
                 2 * m_RotationSpeed * Time.deltaTime);
         }
+
+#elif ROTATE_AIM
+        
 #endif
     }
 
