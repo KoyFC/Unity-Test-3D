@@ -1,5 +1,4 @@
 //#define ROTATE_CAMERA
-#define ROTATE_MOVEMENT
 using System.Collections;
 using UnityEngine;
 
@@ -21,8 +20,6 @@ public class PlayerMovementScript : MonoBehaviour
     [SerializeField] private float m_JumpBufferTime = 0.5f;
     public bool m_CoyoteTimeActive;
     public bool m_JumpBuffered;
-    private float m_CoyoteTimeCounter;
-    private float m_JumpBufferCounter;
 
     [Header("Rotation")]
     [SerializeField] private float m_RotationSpeed = 40f;
@@ -42,8 +39,16 @@ public class PlayerMovementScript : MonoBehaviour
     {
         IsGrounded = Physics.Raycast(transform.position, Vector3.down, 1.1f);
 
-        HandleCoyoteTime();
-        HandleJumpBuffer();
+        if (IsGrounded && !m_CoyoteTimeActive)
+        {
+            StartCoroutine(CoyoteTimeCoroutine());
+        }
+
+        if (m_PlayerController.m_InputManager.m_JumpPressed && !m_JumpBuffered)
+        {
+            StartCoroutine(JumpBufferCoroutine());
+        }
+
         HandleJump();
     }
 
@@ -56,7 +61,7 @@ public class PlayerMovementScript : MonoBehaviour
 
     #region Handling Methods
     private void HandleMovement()
-{
+    {
         float currentSpeed = m_PlayerController.m_InputManager.m_SprintHeld ?
             m_RunningSpeedMultiplier * m_WalkingSpeed : m_WalkingSpeed;
 
@@ -67,7 +72,7 @@ public class PlayerMovementScript : MonoBehaviour
             m_CameraTransform.forward.normalized * inputMovement.y;
 
         m_Rigidbody.linearVelocity = new Vector3(
-            moveDirection.x * currentSpeed, 
+            moveDirection.x * currentSpeed,
             m_Rigidbody.linearVelocity.y,
             moveDirection.z * currentSpeed);
     }
@@ -83,7 +88,7 @@ public class PlayerMovementScript : MonoBehaviour
             Quaternion.LookRotation(cameraDirection), 
             m_RotationSpeed * Time.deltaTime);
 
-#elif ROTATE_MOVEMENT
+#else
         Vector2 inputMovement = m_PlayerController.m_InputManager.m_Movement;
 
         // Rotating based on the movement input
@@ -106,82 +111,50 @@ public class PlayerMovementScript : MonoBehaviour
     {
         if (m_CoyoteTimeActive && m_JumpBuffered)
         {
-            m_JumpBufferCounter = 0;
+            m_JumpBuffered = false;
+            m_CoyoteTimeActive = false;
 
+            // Clearing the y velocity to avoid taking into account current velocity
             m_Rigidbody.linearVelocity = new Vector3(
                 m_Rigidbody.linearVelocity.x,
                 0,
                 m_Rigidbody.linearVelocity.z);
 
+            // Adding the jump force: if the jump is being held during the first frame, we jump higher
             if (m_PlayerController.m_InputManager.m_JumpHeld)
             {
                 m_Rigidbody.AddForce(Vector3.up * m_JumpForce, ForceMode.Impulse);
             }
-            else
+            else // This helps when the player is pressing the jump button before landing
             {
                 m_Rigidbody.AddForce(0.5f * m_JumpForce * Vector3.up, ForceMode.Impulse);
             }
-                
         }
 
+        // Reducing the jump height if the jump button is released
         if (m_PlayerController.m_InputManager.m_JumpReleased && m_Rigidbody.linearVelocity.y > 0)
         {
-            m_CoyoteTimeCounter = 0;
-
             m_Rigidbody.linearVelocity = new Vector3(
                 m_Rigidbody.linearVelocity.x,
                 m_Rigidbody.linearVelocity.y * 0.5f,
                 m_Rigidbody.linearVelocity.z);
         }
     }
-
-    private void HandleCoyoteTime()
-    {
-        if (IsGrounded)
-        {
-            m_CoyoteTimeCounter = m_CoyoteTime;
-        }
-        else
-        {
-            m_CoyoteTimeCounter -= Time.deltaTime;
-        }
-
-
-        if (m_CoyoteTimeCounter > 0)
-        {
-            m_CoyoteTimeActive = true;
-        }
-        else
-        {
-            m_CoyoteTimeCounter = 0;
-            m_CoyoteTimeActive = false;
-        }
-    }
-
-    private void HandleJumpBuffer()
-    {
-        if (m_PlayerController.m_InputManager.m_JumpPressed)
-        {
-            m_JumpBufferCounter = m_JumpBufferTime;
-        }
-        else
-        {
-            m_JumpBufferCounter -= Time.deltaTime;
-        }
-
-        if (m_JumpBufferCounter > 0)
-        {
-            m_JumpBuffered = true;
-        }
-        else
-        {
-            m_JumpBufferCounter = 0;
-            m_JumpBuffered = false;
-        }
-    }
     #endregion
 
-    #region Helper Methods
-    
+    #region Coroutines
+    private IEnumerator CoyoteTimeCoroutine()
+    {
+        m_CoyoteTimeActive = true;
+        yield return new WaitForSeconds(m_CoyoteTime);
+        m_CoyoteTimeActive = false;
+    }
+
+    private IEnumerator JumpBufferCoroutine()
+    {
+        m_JumpBuffered = true;
+        yield return new WaitForSeconds(m_JumpBufferTime);
+        m_JumpBuffered = false;
+    }
     #endregion
 }
