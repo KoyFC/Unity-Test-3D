@@ -54,7 +54,7 @@ MonoBehaviour:
   m_CanRegen: 1
   m_StartRegen: 1
   m_RegenRate: 1
-  m_RegenDelay: 1
+  m_RegenDelay: 2
   m_FlashingColor: {r: 1, g: 1, b: 1, a: 1}
   m_FlashCount: 4
   m_FlashDuration: 0.15

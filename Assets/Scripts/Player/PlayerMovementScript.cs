@@ -1,7 +1,3 @@
-#define SHIFT_LOCK
-#define ROTATE_CAMERA
-#define ROTATE_MOVEMENT
-#define ROTATE_AIM
 using System.Collections;
 using Unity.Cinemachine;
 using UnityEngine;
@@ -40,6 +36,7 @@ public class PlayerMovementScript : MonoBehaviour
         m_PlayerController = GetComponent<PlayerController>();
         m_CameraTransform = Camera.main.transform;
 
+        ShiftLock = true;
         Cursor.lockState = ShiftLock ? CursorLockMode.Locked : CursorLockMode.None;
         Cursor.visible = !ShiftLock;
     }
@@ -105,7 +102,6 @@ public class PlayerMovementScript : MonoBehaviour
 
     private void HandleRotation()
     {
-#if SHIFT_LOCK
         if (ShiftLock)
         {
             Vector3 cameraDirection = m_CameraTransform.forward;
@@ -134,35 +130,6 @@ public class PlayerMovementScript : MonoBehaviour
                     2 * m_RotationSpeed * Time.deltaTime);
             }
         }
-#elif ROTATE_CAMERA              
-        Vector3 cameraDirection = m_CameraTransform.forward;
-        cameraDirection.y = 0;
-
-        transform.rotation = Quaternion.RotateTowards(
-            transform.rotation, 
-            Quaternion.LookRotation(cameraDirection), 
-            1.5f * m_RotationSpeed * Time.deltaTime);
-
-#elif ROTATE_MOVEMENT
-        Vector2 inputMovement = m_PlayerController.m_InputManager.m_Movement;
-
-        // Rotating based on the movement input
-        Vector3 rotateDirection = m_CameraTransform.right.normalized * inputMovement.x +
-            m_CameraTransform.forward.normalized * inputMovement.y;
-
-        rotateDirection.y = 0;
-
-        if (inputMovement != Vector2.zero)
-        {
-            transform.rotation = Quaternion.RotateTowards(
-                transform.rotation,
-                Quaternion.LookRotation(rotateDirection),
-                2 * m_RotationSpeed * Time.deltaTime);
-        }
-
-#elif ROTATE_AIM
-        
-#endif
     }
 
     private void HandleJump()
