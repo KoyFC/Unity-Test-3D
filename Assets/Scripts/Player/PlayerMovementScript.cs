@@ -11,11 +11,15 @@ public class PlayerMovementScript : MonoBehaviour
     }
 
     private PlayerController m_PlayerController;
+    private Transform m_CameraTransform;
 
     [Header("Movement")]
     [SerializeField] private float m_WalkingSpeed = 6.5f;
     [SerializeField] private float m_RunningSpeedMultiplier = 2f;
     [SerializeField] private float m_JumpForce = 8f;
+
+    [Header("Rotation")]
+    [SerializeField] private float m_RotationSpeed = 40f;
 
     private bool IsGrounded { get; set; }
     private bool m_IsGrounded;
@@ -25,14 +29,15 @@ public class PlayerMovementScript : MonoBehaviour
     void Start()
     {
         m_PlayerController = GetComponent<PlayerController>();
+        m_CameraTransform = Camera.main.transform;
     }
 
     void Update()
     {
-        HandleLook();
+        HandleRotation();
     }
 
-    private void FixedUpdate()
+    void FixedUpdate()
     {
         HandleMovement();
         HandleJump();
@@ -40,21 +45,32 @@ public class PlayerMovementScript : MonoBehaviour
 
     private void HandleMovement()
     {
-        Vector2 movement = m_PlayerController.m_InputManager.m_Movement;
-
         float appliedMultiplier = m_PlayerController.m_InputManager.m_SprintHeld ? m_RunningSpeedMultiplier : 1f;
 
-        m_PlayerController.m_Rigidbody.linearVelocity = appliedMultiplier * m_WalkingSpeed * new Vector3(movement.x, 0, movement.y);
+        Vector2 inputMovement = m_PlayerController.m_InputManager.m_Movement;
+
+        // Determining where to move based on where the camera is looking
+        Vector3 moveDirection = m_CameraTransform.right.normalized * inputMovement.x +
+                                m_CameraTransform.forward.normalized * inputMovement.y;
+
+        m_PlayerController.m_Rigidbody.linearVelocity = appliedMultiplier * m_WalkingSpeed * new Vector3(moveDirection.x, 0, moveDirection.z);
+    }
+
+    private void HandleRotation()
+    {
+        Vector3 cameraDirection = m_CameraTransform.forward;
+        cameraDirection.y = 0;
+
+        
+        transform.rotation = Quaternion.RotateTowards(
+            transform.rotation, 
+            Quaternion.LookRotation(cameraDirection), 
+            m_RotationSpeed * Time.deltaTime);
+        
     }
 
     private void HandleJump()
     {
 
     }
-
-    private void HandleLook()
-    {
-
-    }
-
 }
