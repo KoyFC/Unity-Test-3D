@@ -119,11 +119,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &23804769 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4277810785178303108, guid: ff084e4bb157534408dc55adf64c2686, type: 3}
-  m_PrefabInstance: {fileID: 4775985215236335086}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &215990955
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -134,11 +129,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1088045550998598097, guid: 5d84af87160b8c6469caa83660ab5cd6, type: 3}
       propertyPath: m_Name
-      value: Barrel (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 1088045550998598097, guid: 5d84af87160b8c6469caa83660ab5cd6, type: 3}
-      propertyPath: m_Layer
-      value: 6
+      value: Blue Barrel
       objectReference: {fileID: 0}
     - target: {fileID: 1465972853175421693, guid: 5d84af87160b8c6469caa83660ab5cd6, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
@@ -364,19 +355,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8462976914114576767, guid: ff084e4bb157534408dc55adf64c2686, type: 3}
   m_PrefabInstance: {fileID: 4775985215236335086}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &354250309
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 23804769}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4ad20bf5fb83aa241b83f7c96d0b74dd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_InputAxisController: {fileID: 2121543442}
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
@@ -1010,14 +988,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 246184483150683152, guid: ff084e4bb157534408dc55adf64c2686, type: 3}
-      propertyPath: inputAxisController
-      value: 
-      objectReference: {fileID: 2121543442}
     - target: {fileID: 4277810785178303108, guid: ff084e4bb157534408dc55adf64c2686, type: 3}
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 7921192518497271031, guid: ff084e4bb157534408dc55adf64c2686, type: 3}
+      propertyPath: m_InputAxisController
+      value: 
+      objectReference: {fileID: 2121543442}
     - target: {fileID: 8462976914114576767, guid: ff084e4bb157534408dc55adf64c2686, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1061,10 +1039,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 4277810785178303108, guid: ff084e4bb157534408dc55adf64c2686, type: 3}
-      insertIndex: 2
-      addedObject: {fileID: 354250309}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ff084e4bb157534408dc55adf64c2686, type: 3}
 --- !u!1001 &8692863583763360716
 PrefabInstance:
@@ -1076,11 +1051,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1088045550998598097, guid: 5d84af87160b8c6469caa83660ab5cd6, type: 3}
       propertyPath: m_Name
-      value: Barrel
-      objectReference: {fileID: 0}
-    - target: {fileID: 1088045550998598097, guid: 5d84af87160b8c6469caa83660ab5cd6, type: 3}
-      propertyPath: m_Layer
-      value: 6
+      value: Red Barrel
       objectReference: {fileID: 0}
     - target: {fileID: 1512153811912150073, guid: 5d84af87160b8c6469caa83660ab5cd6, type: 3}
       propertyPath: m_LocalPosition.x

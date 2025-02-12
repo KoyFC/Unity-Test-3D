@@ -2,13 +2,13 @@ using UnityEngine;
 
 public class InputManager : MonoBehaviour
 {
-    public Vector2 m_Movement;
-    public Vector2 m_Look;
-    public bool m_JumpPressed;
-    public bool m_JumpHeld;
-    public bool m_JumpReleased;
-    public bool m_SprintHeld;
-    public bool m_FireHeld;
+    [HideInInspector] public Vector2 m_Movement;
+    [HideInInspector] public Vector2 m_Look;
+    [HideInInspector] public bool m_JumpPressed;
+    [HideInInspector] public bool m_JumpHeld;
+    [HideInInspector] public bool m_JumpReleased;
+    [HideInInspector] public bool m_SprintHeld;
+    [HideInInspector] public bool m_FireHeld;
 
     void Update()
     {

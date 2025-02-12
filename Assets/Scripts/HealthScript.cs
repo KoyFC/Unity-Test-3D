@@ -15,12 +15,15 @@ public class HealthScript : MonoBehaviour
     [SerializeField][Min(0)] private float m_RegenDelay = 1f;
 
     [Header("Invincibility")]
-    private Color m_OriginalColor;
     [SerializeField] private Color m_FlashingColor = Color.white;
+    private Color m_OriginalColor;
     [SerializeField][Min(0)] private int m_FlashCount = 3;
     [SerializeField][Min(0)] private float m_FlashDuration = 0.1f;
     [SerializeField][Min(0)] private float m_InvincibilityTime = 0.5f;
     private bool m_IsInvincible;
+
+    [Header("Damage")]
+    [SerializeField] private float m_SpeedMultiplierWhenHit = 0.5f;
 
     void Start()
     {
@@ -65,16 +68,17 @@ public class HealthScript : MonoBehaviour
     {
         if (!m_IsInvincible)
         {
-            Debug.Log("Ouch! " + name + " took " + damage + " damage!");
-            Debug.Log("Health: " + m_CurrentHealth + " -> " + (m_CurrentHealth - damage));
+            Debug.Log(name + "'s Health: " + m_CurrentHealth + " -> " + (m_CurrentHealth - damage));
 
             m_CurrentHealth -= damage;
 
+            if (TryGetComponent<Rigidbody>(out var rigidbody))
+            {
+                rigidbody.linearVelocity = rigidbody.linearVelocity * m_SpeedMultiplierWhenHit;
+                rigidbody.angularVelocity = rigidbody.angularVelocity * m_SpeedMultiplierWhenHit;
+            }
+
             StartCoroutine(InvincibleAfterHit());
-        }
-        else
-        {
-            Debug.Log(name + " is invincible right now! No damage was dealt.");
         }
     }
 

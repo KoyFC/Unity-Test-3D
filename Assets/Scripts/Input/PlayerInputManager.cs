@@ -6,8 +6,8 @@ public class PlayerInputManager : InputManager
 {
     private PlayerInput m_PlayerInput;
 
-    public bool m_ShiftLockPressed;
-    public bool m_MoveCameraHeld;
+    [HideInInspector] public bool m_ShiftLockPressed;
+    [HideInInspector] public bool m_MoveCameraHeld;
     
     void Start()
     {

@@ -52,7 +52,7 @@ MonoBehaviour:
   m_FireRate: 0.1
   m_BulletPrefab: {fileID: 2850252973846066532, guid: 81d53e49b18ea2846a36b293fd77dcc7, type: 3}
   m_BulletDamage: 2
-  m_BulletVelocity: 15
+  m_BulletVelocity: 30
 --- !u!33 &4972279568135388426
 MeshFilter:
   m_ObjectHideFlags: 0

@@ -36,9 +36,7 @@ public class PlayerMovementScript : MonoBehaviour
         m_PlayerController = GetComponent<PlayerController>();
         m_CameraTransform = Camera.main.transform;
 
-        ShiftLock = true;
-        Cursor.lockState = ShiftLock ? CursorLockMode.Locked : CursorLockMode.None;
-        Cursor.visible = !ShiftLock;
+        ShiftLock = false;
     }
 
     private void Update()
@@ -53,23 +51,6 @@ public class PlayerMovementScript : MonoBehaviour
         if (m_PlayerController.m_InputManager.m_JumpPressed && !m_JumpBuffered)
         {
             StartCoroutine(JumpBufferCoroutine());
-        }
-
-        if (m_PlayerController.m_InputManager.m_ShiftLockPressed)
-        {
-            ShiftLock = !ShiftLock;
-
-            Cursor.lockState = ShiftLock ? CursorLockMode.Locked : CursorLockMode.None;
-            Cursor.visible = !ShiftLock;
-        }
-
-        if (ShiftLock)
-        {
-            
-        }
-        else
-        {
-            
         }
 
         HandleJump();
@@ -102,7 +83,7 @@ public class PlayerMovementScript : MonoBehaviour
 
     private void HandleRotation()
     {
-        if (ShiftLock)
+        if (ShiftLock) // Rotating based on the camera direction
         {
             Vector3 cameraDirection = m_CameraTransform.forward;
             cameraDirection.y = 0;
@@ -112,11 +93,10 @@ public class PlayerMovementScript : MonoBehaviour
                 Quaternion.LookRotation(cameraDirection),
                 1.5f * m_RotationSpeed * Time.deltaTime);
         }
-        else
+        else // Rotating based on the movement input
         {
             Vector2 inputMovement = m_PlayerController.m_InputManager.m_Movement;
 
-            // Rotating based on the movement input
             Vector3 rotateDirection = m_CameraTransform.right.normalized * inputMovement.x +
                 m_CameraTransform.forward.normalized * inputMovement.y;
 
@@ -139,7 +119,7 @@ public class PlayerMovementScript : MonoBehaviour
             m_JumpBuffered = false;
             m_CoyoteTimeActive = false;
 
-            // Clearing the y velocity to avoid taking into account current velocity
+            // Clearing the y velocity to avoid taking into account current vertical velocity
             m_Rigidbody.linearVelocity = new Vector3(
                 m_Rigidbody.linearVelocity.x,
                 0,
@@ -150,7 +130,7 @@ public class PlayerMovementScript : MonoBehaviour
             {
                 m_Rigidbody.AddForce(Vector3.up * m_JumpForce, ForceMode.Impulse);
             }
-            else // This helps when the player is pressing the jump button before landing
+            else // This helps when buffering the jump
             {
                 m_Rigidbody.AddForce(0.5f * m_JumpForce * Vector3.up, ForceMode.Impulse);
             }

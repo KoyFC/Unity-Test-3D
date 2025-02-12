@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 661129473401408922}
   - component: {fileID: 5806341843534557630}
   - component: {fileID: 1465972853175421693}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Barrel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -48,8 +48,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77de39eae621dd948967c264385a2348, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_StartingHealth: 80
-  m_MaxHealth: 100
+  m_StartingHealth: 30
+  m_MaxHealth: 40
   m_CurrentHealth: 0
   m_CanRegen: 1
   m_StartRegen: 1
@@ -59,6 +59,7 @@ MonoBehaviour:
   m_FlashCount: 4
   m_FlashDuration: 0.15
   m_InvincibilityTime: 0.5
+  m_SpeedMultiplierWhenHit: 0.25
 --- !u!54 &3279100548485485086
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -68,8 +69,8 @@ Rigidbody:
   m_GameObject: {fileID: 1088045550998598097}
   serializedVersion: 4
   m_Mass: 1
-  m_Drag: 0.5
-  m_AngularDrag: 0.55
+  m_Drag: 0.6
+  m_AngularDrag: 0.45
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}

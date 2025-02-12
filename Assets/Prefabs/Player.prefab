@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8462976914114576767}
   - component: {fileID: 8185380162917657678}
+  - component: {fileID: 7921192518497271031}
   - component: {fileID: 246184483150683152}
   - component: {fileID: 1746404660134230172}
   - component: {fileID: 5631168095239282692}
@@ -53,6 +54,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74b944e59d43ae4439e6929375df50ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &7921192518497271031
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4277810785178303108}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ad20bf5fb83aa241b83f7c96d0b74dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_InputAxisController: {fileID: 0}
 --- !u!114 &246184483150683152
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -70,8 +84,6 @@ MonoBehaviour:
   m_JumpForce: 8
   m_CoyoteTime: 0.3
   m_JumpBufferTime: 0.2
-  m_CoyoteTimeActive: 0
-  m_JumpBuffered: 0
   m_RotationSpeed: 360
 --- !u!114 &1746404660134230172
 MonoBehaviour:
@@ -93,8 +105,10 @@ MonoBehaviour:
   m_RegenRate: 1
   m_RegenDelay: 1
   m_FlashingColor: {r: 1, g: 1, b: 1, a: 1}
+  m_FlashCount: 3
   m_FlashDuration: 0.1
   m_InvincibilityTime: 0.5
+  m_SpeedMultiplierWhenHit: 0
 --- !u!114 &5631168095239282692
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -114,6 +128,8 @@ MonoBehaviour:
   m_JumpReleased: 0
   m_SprintHeld: 0
   m_FireHeld: 0
+  m_ShiftLockPressed: 0
+  m_MoveCameraHeld: 0
 --- !u!114 &6361870575118222297
 MonoBehaviour:
   m_ObjectHideFlags: 0
