@@ -37,7 +37,7 @@ public class PlayerMovementScript : MonoBehaviour
         m_PlayerController = GetComponent<PlayerController>();
         m_CameraTransform = Camera.main.transform;
 
-        ShiftLock = true;
+        ShiftLock = false;
     }
 
     private void Update()

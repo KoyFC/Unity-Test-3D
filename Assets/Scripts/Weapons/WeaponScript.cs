@@ -30,7 +30,14 @@ public class WeaponScript : MonoBehaviour
 
         GameObject bullet = Instantiate(m_WeaponData.m_BulletPrefab, m_FirePoint.position, m_FirePoint.rotation);
 
-        bullet.GetComponent<Rigidbody>().linearVelocity = m_FirePoint.forward * m_WeaponData.m_BulletVelocity;
+        Vector3 parentVelocity = Vector3.zero;
+
+        if (transform.parent.TryGetComponent<Rigidbody>(out var rigidbody))
+        {
+            parentVelocity = rigidbody.linearVelocity;
+        }
+
+        bullet.GetComponent<Rigidbody>().linearVelocity = parentVelocity + m_FirePoint.forward * m_WeaponData.m_BulletVelocity;
         bullet.GetComponent<BulletScript>().m_Damage = m_WeaponData.m_BulletDamage;
 
         yield return new WaitForSeconds(m_WeaponData.m_FireRate);
