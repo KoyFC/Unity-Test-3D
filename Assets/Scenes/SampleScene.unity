@@ -267,7 +267,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.1521234, y: -0.000000027156775, z: 0.000000004179828, w: 0.98836154}
+  m_LocalRotation: {x: 0.1521234, y: 0.0000000020576232, z: -3.1669856e-10, w: 0.98836154}
   m_LocalPosition: {x: 0, y: 7.0970583, z: -9.537169}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -842,7 +842,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2121543441}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.1521234, y: -0.000000027156776, z: 0.000000004179828, w: 0.98836154}
+  m_LocalRotation: {x: 0.1521234, y: 0.0000000019417106, z: 4.363986e-10, w: 0.98836154}
   m_LocalPosition: {x: 0, y: 7.0970583, z: -9.537169}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -992,9 +992,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 6131533740638001157, guid: ff084e4bb157534408dc55adf64c2686, type: 3}
-      propertyPath: m_FireRate
-      value: 0.15
+    - target: {fileID: 7050011453669738987, guid: ff084e4bb157534408dc55adf64c2686, type: 3}
+      propertyPath: m_CurrentWeaponIndex
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7921192518497271031, guid: ff084e4bb157534408dc55adf64c2686, type: 3}
       propertyPath: m_InputAxisController

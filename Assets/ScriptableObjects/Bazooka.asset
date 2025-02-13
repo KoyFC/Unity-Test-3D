@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1428585b5c2d80b439fbb3dc50299274, type: 3}
+  m_Name: Bazooka
+  m_EditorClassIdentifier: 
+  m_WeaponName: Bazooka
+  m_WeaponIcon: {fileID: 0}
+  m_MagazineSize: 30
+  m_MaxAmmo: 120
+  m_ReloadTime: 1.5
+  m_FireRate: 0.5
+  m_BulletPrefab: {fileID: 2850252973846066532, guid: ad0bc8540ad3e4e44ad52ab2b9ea21c8, type: 3}
+  m_BulletDamage: 10
+  m_BulletVelocity: 12.5
+  m_ImpactParticles: {fileID: 0}

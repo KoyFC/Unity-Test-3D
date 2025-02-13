@@ -15,6 +15,7 @@ public class HealthScript : MonoBehaviour
     [SerializeField][Min(0)] private float m_RegenDelay = 1f;
 
     [Header("Invincibility")]
+    [SerializeField] private GameObject m_ShieldPrefab;
     [SerializeField] private Color m_FlashingColor = Color.white;
     private Color m_OriginalColor;
     [SerializeField][Min(0)] private int m_FlashCount = 3;

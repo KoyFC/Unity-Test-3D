@@ -3,11 +3,11 @@ using System.Collections;
 
 public class WeaponScript : MonoBehaviour
 {
-    [SerializeField] private WeaponData m_WeaponData;
+    [SerializeField] protected WeaponData m_WeaponData;
     protected InputManager m_InputManager;
 
     [Header("Firing")]
-    [SerializeField] private Transform m_FirePoint;
+    [SerializeField] protected Transform m_FirePoint;
     protected bool m_CanFire;
 
     void Start()
@@ -24,7 +24,7 @@ public class WeaponScript : MonoBehaviour
         }
     }
 
-    private IEnumerator Fire()
+    protected virtual IEnumerator Fire()
     {
         m_CanFire = false;
 
