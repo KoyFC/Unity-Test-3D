@@ -3,7 +3,6 @@ using UnityEngine;
 [RequireComponent(typeof(HealthScript))]
 [RequireComponent(typeof(PlayerMovementScript))]
 [RequireComponent(typeof(PlayerInputManager))]
-[RequireComponent(typeof(Rigidbody))]
 public class PlayerController : MonoBehaviour
 {
     #region Variables

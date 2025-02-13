@@ -992,6 +992,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 6131533740638001157, guid: ff084e4bb157534408dc55adf64c2686, type: 3}
+      propertyPath: m_FireRate
+      value: 0.15
+      objectReference: {fileID: 0}
     - target: {fileID: 7921192518497271031, guid: ff084e4bb157534408dc55adf64c2686, type: 3}
       propertyPath: m_InputAxisController
       value: 

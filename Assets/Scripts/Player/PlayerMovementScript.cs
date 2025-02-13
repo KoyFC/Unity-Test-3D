@@ -3,6 +3,7 @@ using Unity.Cinemachine;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(PlayerController))]
 public class PlayerMovementScript : MonoBehaviour
 {
     #region Variables
@@ -36,7 +37,7 @@ public class PlayerMovementScript : MonoBehaviour
         m_PlayerController = GetComponent<PlayerController>();
         m_CameraTransform = Camera.main.transform;
 
-        ShiftLock = false;
+        ShiftLock = true;
     }
 
     private void Update()
