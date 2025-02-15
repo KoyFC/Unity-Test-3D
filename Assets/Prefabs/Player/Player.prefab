@@ -116,8 +116,6 @@ MonoBehaviour:
   m_JumpForce: 8
   m_CoyoteTime: 0.3
   m_JumpBufferTime: 0.2
-  m_CoyoteTimeActive: 0
-  m_JumpBuffered: 0
   m_RotationSpeed: 360
 --- !u!114 &1746404660134230172
 MonoBehaviour:

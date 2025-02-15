@@ -1,12 +1,13 @@
 using System.Collections;
 using UnityEngine;
+using System;
 
 public class HealthScript : MonoBehaviour
 {
     #region Variables
     [Header("Health")]
     [SerializeField][Min(0)] private int m_StartingHealth = 80;
-    [SerializeField][Min(0)] private int m_MaxHealth = 100;
+    [SerializeField][Min(0)] internal int m_MaxHealth = 100;
     [Min(0)] public int m_CurrentHealth;
 
     [Header("Regeneration")]
@@ -27,6 +28,8 @@ public class HealthScript : MonoBehaviour
 
     [Header("Damage")]
     [SerializeField] private float m_SpeedMultiplierWhenHit = 0.5f;
+
+    public event Action<int> OnHealthChanged;
     #endregion
 
     #region Main Methods
@@ -34,6 +37,8 @@ public class HealthScript : MonoBehaviour
     {
         m_CurrentHealth = m_StartingHealth;
         m_OriginalColor = GetComponent<Renderer>().material.color;
+
+        OnHealthChanged?.Invoke(m_CurrentHealth);
     }
 
     void Update()
@@ -68,6 +73,8 @@ public class HealthScript : MonoBehaviour
 
         m_CurrentHealth += m_RegenRate;
         m_CurrentHealth = Mathf.Clamp(m_CurrentHealth, 0, m_MaxHealth);
+
+        OnHealthChanged?.Invoke(m_CurrentHealth);
     }
 
     public void TakeDamage(int damage)
@@ -75,6 +82,8 @@ public class HealthScript : MonoBehaviour
         if (!m_IsInvincible)
         {
             m_CurrentHealth -= damage;
+
+            OnHealthChanged?.Invoke(m_CurrentHealth);
 
             if (TryGetComponent<Rigidbody>(out var rigidbody))
             {
