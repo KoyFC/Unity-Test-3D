@@ -55,8 +55,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_WeaponPrefabs:
-  - {fileID: 8394688171485543821, guid: 30527de46ff3e484681c2cc84f3305eb, type: 3}
-  - {fileID: 2867096298028183107, guid: 29011e969402ae74e8050e56995d671e, type: 3}
+  - {fileID: 1601714596500871854, guid: 98b903ce5cb1d9646b57b01922dc5f77, type: 3}
+  - {fileID: 1868190559307203236, guid: 75ddbe4469fd6b94d9fea72bac17bcd3, type: 3}
   m_CurrentWeaponIndex: 0
 --- !u!114 &8185380162917657678
 MonoBehaviour:
@@ -120,6 +120,8 @@ MonoBehaviour:
   m_StartRegen: 1
   m_RegenRate: 1
   m_RegenDelay: 1
+  m_ShieldPrefab: {fileID: 4018697744268574472, guid: c52ea51af94627c409c8a5763d28bfa6, type: 3}
+  m_ShieldScale: {x: 1, y: 1, z: 1}
   m_FlashingColor: {r: 1, g: 1, b: 1, a: 1}
   m_FlashCount: 3
   m_FlashDuration: 0.1

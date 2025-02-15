@@ -4,6 +4,7 @@ using System.Collections;
 public class WeaponScript : MonoBehaviour
 {
     [SerializeField] protected WeaponData m_WeaponData;
+    [SerializeField] protected Vector3 m_WeaponOffset;
     protected InputManager m_InputManager;
 
     [Header("Firing")]
@@ -13,13 +14,17 @@ public class WeaponScript : MonoBehaviour
     private void OnEnable()
     {
         m_CanFire = true;
-        
     }
 
     void Awake()
     {
         m_InputManager = GetComponentInParent<InputManager>();
         m_CanFire = true;
+    }
+
+    void Start()
+    {
+        transform.localPosition = m_WeaponOffset;
     }
 
     void Update()

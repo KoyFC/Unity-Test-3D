@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class HealthScript : MonoBehaviour
 {
+    #region Variables
     [Header("Health")]
     [SerializeField][Min(0)] private int m_StartingHealth = 80;
     [SerializeField][Min(0)] private int m_MaxHealth = 100;
@@ -16,6 +17,7 @@ public class HealthScript : MonoBehaviour
 
     [Header("Invincibility")]
     [SerializeField] private GameObject m_ShieldPrefab;
+    [SerializeField] private Vector3 m_ShieldScale = new Vector3(2.5f, 2.5f, 2.5f);
     [SerializeField] private Color m_FlashingColor = Color.white;
     private Color m_OriginalColor;
     [SerializeField][Min(0)] private int m_FlashCount = 3;
@@ -25,7 +27,9 @@ public class HealthScript : MonoBehaviour
 
     [Header("Damage")]
     [SerializeField] private float m_SpeedMultiplierWhenHit = 0.5f;
+    #endregion
 
+    #region Main Methods
     void Start()
     {
         m_CurrentHealth = m_StartingHealth;
@@ -46,7 +50,9 @@ public class HealthScript : MonoBehaviour
             Destroy(gameObject, 0.5f);
         }
     }
-    
+    #endregion
+
+    #region Helper Methods
     private void RegenHealth()
     {
         // We stop regenerating health if we're dead. Otherwise we keep going.
@@ -83,8 +89,25 @@ public class HealthScript : MonoBehaviour
     private IEnumerator InvincibleAfterHit()
     {
         m_IsInvincible = true;
+
+        // Spawning the shield if the prefab is set
+        GameObject shield = null;
+        if (m_ShieldPrefab != null)
+        {
+            shield = Instantiate(m_ShieldPrefab, transform);
+            shield.transform.localScale = m_ShieldScale;
+        }
+
         StartCoroutine(Flash());
+
         yield return new WaitForSeconds(m_InvincibilityTime);
+
+        // If a shield was spawned, destroy it
+        if (shield != null)
+        {
+            Destroy(shield);
+        }
+
         m_IsInvincible = false;
     }
 
@@ -95,8 +118,10 @@ public class HealthScript : MonoBehaviour
         {
             renderer.material.color = m_FlashingColor;
             yield return new WaitForSeconds(m_FlashDuration);
+
             renderer.material.color = m_OriginalColor;
             yield return new WaitForSeconds(m_FlashDuration);
         }
     }
+    #endregion
 }

@@ -720,6 +720,7 @@ MonoBehaviour:
   m_RegenRate: 1
   m_RegenDelay: 1
   m_ShieldPrefab: {fileID: 0}
+  m_ShieldScale: {x: 1, y: 1, z: 1}
   m_FlashingColor: {r: 1, g: 1, b: 1, a: 1}
   m_FlashCount: 3
   m_FlashDuration: 0.1
@@ -1018,13 +1019,13 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1746404660134230172, guid: ff084e4bb157534408dc55adf64c2686, type: 3}
+      propertyPath: m_ShieldPrefab
+      value: 
+      objectReference: {fileID: 4018697744268574472, guid: c52ea51af94627c409c8a5763d28bfa6, type: 3}
     - target: {fileID: 4277810785178303108, guid: ff084e4bb157534408dc55adf64c2686, type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 7050011453669738987, guid: ff084e4bb157534408dc55adf64c2686, type: 3}
-      propertyPath: m_CurrentWeaponIndex
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7921192518497271031, guid: ff084e4bb157534408dc55adf64c2686, type: 3}
       propertyPath: m_InputAxisController
@@ -1093,7 +1094,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4825262387518534862, guid: 56a83a5e17f66904e958ec22ac852ab3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 5.97
       objectReference: {fileID: 0}
     - target: {fileID: 4825262387518534862, guid: 56a83a5e17f66904e958ec22ac852ab3, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1101,7 +1102,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4825262387518534862, guid: 56a83a5e17f66904e958ec22ac852ab3, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 7.74
       objectReference: {fileID: 0}
     - target: {fileID: 4825262387518534862, guid: 56a83a5e17f66904e958ec22ac852ab3, type: 3}
       propertyPath: m_LocalRotation.w

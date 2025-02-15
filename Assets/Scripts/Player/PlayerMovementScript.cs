@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using Unity.Cinemachine;
 using UnityEngine;
@@ -44,15 +45,8 @@ public class PlayerMovementScript : MonoBehaviour
     {
         IsGrounded = Physics.Raycast(transform.position, Vector3.down, 1.1f);
 
-        if (IsGrounded && !m_CoyoteTimeActive)
-        {
-            StartCoroutine(CoyoteTimeCoroutine());
-        }
-
-        if (m_PlayerController.m_InputManager.m_JumpPressed && !m_JumpBuffered)
-        {
-            StartCoroutine(JumpBufferCoroutine());
-        }
+        HandleCoyoteTime();
+        HandleJumpBuffer();
 
         HandleJump();
     }
@@ -144,6 +138,22 @@ public class PlayerMovementScript : MonoBehaviour
                 m_Rigidbody.linearVelocity.x,
                 m_Rigidbody.linearVelocity.y * 0.5f,
                 m_Rigidbody.linearVelocity.z);
+        }
+    }
+
+    private void HandleCoyoteTime()
+    {
+        if (IsGrounded && !m_CoyoteTimeActive)
+        {
+            StartCoroutine(CoyoteTimeCoroutine());
+        }
+    }
+
+    private void HandleJumpBuffer()
+    {
+        if (m_PlayerController.m_InputManager.m_JumpPressed && !m_JumpBuffered)
+        {
+            StartCoroutine(JumpBufferCoroutine());
         }
     }
     #endregion

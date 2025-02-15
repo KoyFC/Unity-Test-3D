@@ -55,6 +55,8 @@ MonoBehaviour:
   m_StartRegen: 1
   m_RegenRate: 1
   m_RegenDelay: 2
+  m_ShieldPrefab: {fileID: 4018697744268574472, guid: c52ea51af94627c409c8a5763d28bfa6, type: 3}
+  m_ShieldScale: {x: 2.5, y: 3.5, z: 2.5}
   m_FlashingColor: {r: 1, g: 1, b: 1, a: 1}
   m_FlashCount: 4
   m_FlashDuration: 0.15
