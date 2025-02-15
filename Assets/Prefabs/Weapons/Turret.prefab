@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4825262387518534862}
+  - component: {fileID: 8714979376364152935}
   - component: {fileID: 7364627245069113017}
   - component: {fileID: 5311043329854877240}
   - component: {fileID: 3679315940443775324}
@@ -29,13 +30,39 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.75, y: 1.3, z: 0.75}
+  m_LocalScale: {x: 0.75, y: 1.2, z: 0.75}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8642177254368601822}
   - {fileID: 1724305397378701718}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8714979376364152935
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3176942212610899476}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77de39eae621dd948967c264385a2348, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_StartingHealth: 50
+  m_MaxHealth: 60
+  m_CurrentHealth: 0
+  m_CanRegen: 1
+  m_StartRegen: 1
+  m_RegenRate: 1
+  m_RegenDelay: 1
+  m_ShieldPrefab: {fileID: 0}
+  m_ShieldScale: {x: 1, y: 1, z: 1}
+  m_FlashingColor: {r: 1, g: 1, b: 1, a: 1}
+  m_FlashCount: 3
+  m_FlashDuration: 0.1
+  m_InvincibilityTime: 0.5
+  m_SpeedMultiplierWhenHit: 0.5
 --- !u!33 &7364627245069113017
 MeshFilter:
   m_ObjectHideFlags: 0

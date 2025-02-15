@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Bazooka
   m_EditorClassIdentifier: 
   m_WeaponName: Bazooka
-  m_WeaponIcon: {fileID: 0}
+  m_WeaponSprite: {fileID: -2033266086, guid: a8c146cca0fb52045b8cf26120b51ecd, type: 3}
   m_MagazineSize: 30
   m_MaxAmmo: 120
   m_ReloadTime: 1.5

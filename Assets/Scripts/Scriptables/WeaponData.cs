@@ -5,7 +5,7 @@ public class WeaponData : ScriptableObject
 {
     [Header("Weapon")]
     public string m_WeaponName;
-    public Sprite m_WeaponIcon;
+    public Sprite m_WeaponSprite;
     public int m_MagazineSize = 30;
     public int m_MaxAmmo = 120;
     public float m_ReloadTime = 1.5f;

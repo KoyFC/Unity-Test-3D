@@ -3,7 +3,7 @@ using System.Collections;
 
 public class WeaponScript : MonoBehaviour
 {
-    [SerializeField] protected WeaponData m_WeaponData;
+    public WeaponData m_WeaponData; // Public so we can set it in the inspector AND access the sprite in other scripts
     [SerializeField] protected Vector3 m_WeaponOffset;
     protected InputManager m_InputManager;
 
