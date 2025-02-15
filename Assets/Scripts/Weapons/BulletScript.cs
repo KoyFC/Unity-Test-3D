@@ -17,6 +17,11 @@ public class BulletScript : MonoBehaviour
             healthScript.TakeDamage(m_Damage);
         }
 
+        if (collision.gameObject.layer == gameObject.layer)
+        {
+            return;
+        }
+
         Destroy(gameObject);
     }
 }

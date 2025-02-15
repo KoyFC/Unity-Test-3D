@@ -10,7 +10,13 @@ public class WeaponScript : MonoBehaviour
     [SerializeField] protected Transform m_FirePoint;
     protected bool m_CanFire;
 
-    void Start()
+    private void OnEnable()
+    {
+        m_CanFire = true;
+        
+    }
+
+    void Awake()
     {
         m_InputManager = GetComponentInParent<InputManager>();
         m_CanFire = true;

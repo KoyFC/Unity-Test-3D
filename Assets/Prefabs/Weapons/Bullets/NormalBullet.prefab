@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5590058412071206573}
   - component: {fileID: 3994879005475635403}
+  - component: {fileID: -4976816773568164148}
   - component: {fileID: 8259963253576200152}
   - component: {fileID: 8315696602072068701}
   - component: {fileID: 1776912369629875340}
@@ -48,6 +49,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90dbbb2f834d2c845a7986af2d499438, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-4976816773568164148
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2850252973846066532}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77de39eae621dd948967c264385a2348, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_StartingHealth: 5
+  m_MaxHealth: 5
+  m_CurrentHealth: 0
+  m_CanRegen: 0
+  m_StartRegen: 0
+  m_RegenRate: 1
+  m_RegenDelay: 1
+  m_ShieldPrefab: {fileID: 0}
+  m_FlashingColor: {r: 1, g: 1, b: 1, a: 1}
+  m_FlashCount: 3
+  m_FlashDuration: 0.1
+  m_InvincibilityTime: 0.5
+  m_SpeedMultiplierWhenHit: 1.5
 --- !u!54 &8259963253576200152
 Rigidbody:
   m_ObjectHideFlags: 0

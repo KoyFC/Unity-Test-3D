@@ -43,7 +43,6 @@ public class HealthScript : MonoBehaviour
 
         if (m_CurrentHealth <= 0)
         {
-            Debug.Log(name + " is dead!");
             Destroy(gameObject, 0.5f);
         }
     }
@@ -69,8 +68,6 @@ public class HealthScript : MonoBehaviour
     {
         if (!m_IsInvincible)
         {
-            Debug.Log(name + "'s Health: " + m_CurrentHealth + " -> " + (m_CurrentHealth - damage));
-
             m_CurrentHealth -= damage;
 
             if (TryGetComponent<Rigidbody>(out var rigidbody))
