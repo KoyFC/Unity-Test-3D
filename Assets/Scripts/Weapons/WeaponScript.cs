@@ -32,14 +32,40 @@ public class WeaponScript : MonoBehaviour
     {
         if (m_InputManager.m_FireHeld && m_CanFire)
         {
-            StartCoroutine(Fire());
+            StartCoroutine(FireWeapon());
         }
     }
 
-    protected virtual IEnumerator Fire()
+    protected virtual IEnumerator FireWeapon()
     {
         m_CanFire = false;
 
+        Fire();
+
+        yield return new WaitForSeconds(m_WeaponData.m_FireRate);
+
+        switch (m_WeaponData.m_FireMode)
+        {
+            case WeaponData.FireMode.Manual:
+                yield return new WaitUntil(() => !m_InputManager.m_FireHeld);
+                break;
+
+            case WeaponData.FireMode.Burst:
+                for (int i = 0; i < m_WeaponData.m_BurstAmount - 1; i++)
+                {
+                    yield return new WaitForSeconds(m_WeaponData.m_FireRate);
+                    Fire();
+                }
+                yield return new WaitForSeconds(m_WeaponData.m_CooldownTime);
+                //yield return new WaitUntil(() => !m_InputManager.m_FireHeld);
+                break;
+        }
+        
+        m_CanFire = true;
+    }
+
+    protected virtual void Fire()
+    {
         GameObject bullet = Instantiate(m_WeaponData.m_BulletPrefab, m_FirePoint.position, m_FirePoint.rotation);
 
         Vector3 parentVelocity = Vector3.zero;
@@ -51,9 +77,5 @@ public class WeaponScript : MonoBehaviour
 
         bullet.GetComponent<Rigidbody>().linearVelocity = parentVelocity + m_FirePoint.forward * m_WeaponData.m_BulletVelocity;
         bullet.GetComponent<BulletScript>().m_Damage = m_WeaponData.m_BulletDamage;
-
-        yield return new WaitForSeconds(m_WeaponData.m_FireRate);
-
-        m_CanFire = true;
     }
 }

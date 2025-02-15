@@ -14,12 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Rarities:
   - m_RarityType: 0
-    m_Color: {r: 0, g: 0, b: 0, a: 0}
+    m_Color: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+  - m_RarityType: 1
+    m_Color: {r: 0, g: 0.764151, b: 0.08280144, a: 1}
+  - m_RarityType: 2
+    m_Color: {r: 0, g: 0.47058824, b: 1, a: 1}
   - m_RarityType: 0
-    m_Color: {r: 0, g: 0, b: 0, a: 0}
-  - m_RarityType: 0
-    m_Color: {r: 0, g: 0, b: 0, a: 0}
-  - m_RarityType: 0
-    m_Color: {r: 0, g: 0, b: 0, a: 0}
-  - m_RarityType: 0
-    m_Color: {r: 0, g: 0, b: 0, a: 0}
+    m_Color: {r: 1, g: 0, b: 1, a: 1}
+  - m_RarityType: 4
+    m_Color: {r: 1, g: 0.6666667, b: 0, a: 1}
