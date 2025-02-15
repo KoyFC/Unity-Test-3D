@@ -15,6 +15,7 @@ public class PlayerMovementScript : MonoBehaviour
     [Header("Movement")]
     [SerializeField] private float m_WalkingSpeed = 6.5f;
     [SerializeField] private float m_RunningSpeedMultiplier = 2f;
+    private float m_CurrentSpeed;
 
     [Header("Jump")]
     [SerializeField] private float m_JumpForce = 8f;
@@ -39,11 +40,22 @@ public class PlayerMovementScript : MonoBehaviour
         m_CameraTransform = Camera.main.transform;
 
         ShiftLock = false;
+
+        m_CurrentSpeed = m_WalkingSpeed;
     }
 
     private void Update()
     {
         IsGrounded = Physics.Raycast(transform.position, Vector3.down, 1.1f);
+
+        if (PlayerInputManager.Instance.m_SprintPressed && m_CurrentSpeed == m_WalkingSpeed)
+        {
+            m_CurrentSpeed = m_RunningSpeedMultiplier * m_WalkingSpeed;
+        }
+        else if (PlayerInputManager.Instance.m_SprintPressed && m_CurrentSpeed != m_WalkingSpeed)
+        {
+            m_CurrentSpeed = m_WalkingSpeed;
+        }
 
         HandleCoyoteTime();
         HandleJumpBuffer();
@@ -61,19 +73,16 @@ public class PlayerMovementScript : MonoBehaviour
     #region Handling Methods
     private void HandleMovement()
     {
-        float currentSpeed = m_PlayerController.m_InputManager.m_SprintHeld ?
-            m_RunningSpeedMultiplier * m_WalkingSpeed : m_WalkingSpeed;
-
-        Vector2 inputMovement = m_PlayerController.m_InputManager.m_Movement;
+        Vector2 inputMovement = PlayerInputManager.Instance.m_Movement;
 
         // Determining where to move based on where the camera is looking
         Vector3 moveDirection = m_CameraTransform.right.normalized * inputMovement.x +
             m_CameraTransform.forward.normalized * inputMovement.y;
 
         m_Rigidbody.linearVelocity = new Vector3(
-            moveDirection.x * currentSpeed,
+            moveDirection.x * m_CurrentSpeed,
             m_Rigidbody.linearVelocity.y,
-            moveDirection.z * currentSpeed);
+            moveDirection.z * m_CurrentSpeed);
     }
 
     private void HandleRotation()
@@ -90,7 +99,7 @@ public class PlayerMovementScript : MonoBehaviour
         }
         else // Rotating based on the movement input
         {
-            Vector2 inputMovement = m_PlayerController.m_InputManager.m_Movement;
+            Vector2 inputMovement = PlayerInputManager.Instance.m_Movement;
 
             Vector3 rotateDirection = m_CameraTransform.right.normalized * inputMovement.x +
                 m_CameraTransform.forward.normalized * inputMovement.y;
@@ -121,7 +130,7 @@ public class PlayerMovementScript : MonoBehaviour
                 m_Rigidbody.linearVelocity.z);
 
             // Adding the jump force: if the jump is being held during the first frame, we jump higher
-            if (m_PlayerController.m_InputManager.m_JumpHeld)
+            if (PlayerInputManager.Instance.m_JumpHeld)
             {
                 m_Rigidbody.AddForce(Vector3.up * m_JumpForce, ForceMode.Impulse);
             }
@@ -132,7 +141,7 @@ public class PlayerMovementScript : MonoBehaviour
         }
 
         // Reducing the jump height if the jump button is released
-        if (m_PlayerController.m_InputManager.m_JumpReleased && m_Rigidbody.linearVelocity.y > 0)
+        if (PlayerInputManager.Instance.m_JumpReleased && m_Rigidbody.linearVelocity.y > 0)
         {
             m_Rigidbody.linearVelocity = new Vector3(
                 m_Rigidbody.linearVelocity.x,
@@ -151,7 +160,7 @@ public class PlayerMovementScript : MonoBehaviour
 
     private void HandleJumpBuffer()
     {
-        if (m_PlayerController.m_InputManager.m_JumpPressed && !m_JumpBuffered)
+        if (PlayerInputManager.Instance.m_JumpPressed && !m_JumpBuffered)
         {
             StartCoroutine(JumpBufferCoroutine());
         }

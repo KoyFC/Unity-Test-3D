@@ -20,8 +20,8 @@ public class PlayerCameraController : MonoBehaviour
     void Update()
     {
         bool shiftLock = m_PlayerController.m_MovementScript.ShiftLock;
-        bool shiftLockPressed = m_PlayerController.m_InputManager.m_ShiftLockPressed;
-        bool moveCameraHeld = m_PlayerController.m_InputManager.m_MoveCameraHeld;
+        bool shiftLockPressed = PlayerInputManager.Instance.m_ShiftLockPressed;
+        bool moveCameraHeld = PlayerInputManager.Instance.m_MoveCameraHeld;
 
         if (shiftLockPressed)
         {

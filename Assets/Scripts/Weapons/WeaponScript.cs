@@ -9,6 +9,7 @@ public class WeaponScript : MonoBehaviour
 
     [Header("Firing")]
     [SerializeField] protected Transform m_FirePoint;
+    [SerializeField] private bool m_AddParentVelocity = false;
     protected bool m_CanFire;
 
     private void OnEnable()
@@ -42,8 +43,8 @@ public class WeaponScript : MonoBehaviour
         GameObject bullet = Instantiate(m_WeaponData.m_BulletPrefab, m_FirePoint.position, m_FirePoint.rotation);
 
         Vector3 parentVelocity = Vector3.zero;
-
-        if (transform.parent.TryGetComponent<Rigidbody>(out var rigidbody))
+        
+        if (m_AddParentVelocity && transform.parent.TryGetComponent<Rigidbody>(out var rigidbody))
         {
             parentVelocity = rigidbody.linearVelocity;
         }

@@ -4,10 +4,24 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(PlayerInput))]
 public class PlayerInputManager : InputManager
 {
+    public static PlayerInputManager Instance;
+
     private PlayerInput m_PlayerInput;
 
     [HideInInspector] public bool m_ShiftLockPressed;
     [HideInInspector] public bool m_MoveCameraHeld;
+
+    void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(this);
+        }
+    }
 
     void Start()
     {
@@ -23,7 +37,7 @@ public class PlayerInputManager : InputManager
         m_MoveCameraHeld = m_PlayerInput.actions["MoveCamera"].IsPressed();
 
         m_Movement = m_PlayerInput.actions["Move"].ReadValue<Vector2>();
-        m_SprintHeld = m_PlayerInput.actions["Sprint"].IsPressed();
+        m_SprintPressed = m_PlayerInput.actions["Sprint"].WasPressedThisFrame();
 
         m_JumpPressed = m_PlayerInput.actions["Jump"].WasPressedThisFrame();
         m_JumpHeld = m_PlayerInput.actions["Jump"].IsPressed();

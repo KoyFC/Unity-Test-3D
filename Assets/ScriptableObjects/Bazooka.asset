@@ -17,8 +17,8 @@ MonoBehaviour:
   m_MagazineSize: 30
   m_MaxAmmo: 120
   m_ReloadTime: 1.5
-  m_FireRate: 0.5
+  m_FireRate: 1
   m_BulletPrefab: {fileID: 2850252973846066532, guid: ad0bc8540ad3e4e44ad52ab2b9ea21c8, type: 3}
   m_BulletDamage: 10
-  m_BulletVelocity: 12.5
+  m_BulletVelocity: 17.5
   m_ImpactParticles: {fileID: 0}

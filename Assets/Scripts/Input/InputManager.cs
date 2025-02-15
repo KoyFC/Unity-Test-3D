@@ -5,7 +5,7 @@ public class InputManager : MonoBehaviour
     [HideInInspector] public Vector2 m_Look;
 
     [HideInInspector] public Vector2 m_Movement;
-    [HideInInspector] public bool m_SprintHeld;
+    [HideInInspector] public bool m_SprintPressed;
 
     [HideInInspector] public bool m_JumpPressed;
     [HideInInspector] public bool m_JumpHeld;
