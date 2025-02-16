@@ -50,7 +50,10 @@ public class PlayerCameraController : MonoBehaviour
         {
             m_InputAxisController.enabled = shiftLock;
         }
-        
+        else if (!shiftLock)
+        {
+            m_InputAxisController.enabled = true;
+        }
 #endif
     }
 
