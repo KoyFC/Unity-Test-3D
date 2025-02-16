@@ -18,7 +18,7 @@ MonoBehaviour:
   m_MagazineSize: 30
   m_MaxAmmo: 120
   m_ReloadTime: 1.5
-  m_FireMode: 2
+  m_FireMode: 3
   m_BurstAmount: 3
   m_CooldownTime: 0.5
   m_FireRate: 0.05
