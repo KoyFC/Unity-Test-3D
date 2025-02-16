@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 3
   tags:
   - DeathZone
+  - Entity
   layers:
   - Default
   - TransparentFX

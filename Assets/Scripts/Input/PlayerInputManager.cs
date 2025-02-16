@@ -44,6 +44,7 @@ public class PlayerInputManager : InputManager
         m_JumpReleased = m_PlayerInput.actions["Jump"].WasReleasedThisFrame();
 
         m_FireHeld = m_PlayerInput.actions["Attack"].IsPressed();
+        m_ReloadPressed = m_PlayerInput.actions["Reload"].WasPressedThisFrame();
 
         if (m_PlayerInput.actions["NextWeapon"].WasPressedThisFrame())
         {

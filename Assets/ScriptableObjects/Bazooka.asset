@@ -14,14 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_UniqueWeaponID: bazooka
   m_WeaponName: Bazooka
-  gunRarityType:
-    m_RarityType: 0
-    m_Color: {r: 0, g: 0, b: 0, a: 0}
   m_WeaponSprite: {fileID: -2033266086, guid: a8c146cca0fb52045b8cf26120b51ecd, type: 3}
-  m_MagazineSize: 30
-  m_MaxAmmo: 120
+  m_MagazineSize: 8
+  m_MaxAmmo: 24
   m_ReloadTime: 1.5
+  m_FireMode: 0
   m_FireRate: 1
+  m_BurstAmount: 3
+  m_CooldownTime: 0.5
   m_BulletPrefab: {fileID: 2850252973846066532, guid: ad0bc8540ad3e4e44ad52ab2b9ea21c8, type: 3}
   m_BulletDamage: 10
   m_BulletVelocity: 17.5

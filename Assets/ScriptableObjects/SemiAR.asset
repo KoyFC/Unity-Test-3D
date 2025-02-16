@@ -17,11 +17,11 @@ MonoBehaviour:
   m_WeaponSprite: {fileID: -1631003095, guid: a8c146cca0fb52045b8cf26120b51ecd, type: 3}
   m_MagazineSize: 30
   m_MaxAmmo: 120
-  m_ReloadTime: 1.5
+  m_ReloadTime: 1
   m_FireMode: 3
+  m_FireRate: 0.05
   m_BurstAmount: 3
   m_CooldownTime: 0.5
-  m_FireRate: 0.05
   m_BulletPrefab: {fileID: 2850252973846066532, guid: 81d53e49b18ea2846a36b293fd77dcc7, type: 3}
   m_BulletDamage: 3
   m_BulletVelocity: 30

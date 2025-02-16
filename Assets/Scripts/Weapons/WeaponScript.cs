@@ -1,8 +1,11 @@
 using UnityEngine;
 using System.Collections;
+using System;
 
 public class WeaponScript : MonoBehaviour
 {
+    #region Variables
+    [Header("Weapon Data")]
     public WeaponData m_WeaponData; // Public so we can set it in the inspector AND access the sprite in other scripts
     [Tooltip("The offset of the weapon from the player's position.")]
     [SerializeField] protected Vector3 m_WeaponOffset;
@@ -14,6 +17,13 @@ public class WeaponScript : MonoBehaviour
     [SerializeField] private bool m_AddParentVelocity = false;
     protected bool m_CanFire;
 
+    [Header("Ammo")]
+    public int m_CurrentMagazineAmmo;
+    public int m_CurrentTotalAmmo;
+    internal bool m_IsReloading;
+    #endregion
+
+    #region Main Methods
     private void OnEnable()
     {
         m_CanFire = true;
@@ -23,6 +33,9 @@ public class WeaponScript : MonoBehaviour
     {
         m_InputManager = GetComponentInParent<InputManager>();
         m_CanFire = true;
+
+        m_CurrentMagazineAmmo = m_WeaponData.m_MagazineSize;
+        m_CurrentTotalAmmo = m_WeaponData.m_MaxAmmo;
     }
 
     void Start()
@@ -32,12 +45,19 @@ public class WeaponScript : MonoBehaviour
 
     void Update()
     {
-        if (m_InputManager.m_FireHeld && m_CanFire)
+        if (m_InputManager.m_FireHeld && m_CanFire && !m_IsReloading)
         {
             StartCoroutine(FireWeapon());
         }
-    }
 
+        if (m_InputManager.m_ReloadPressed && !m_IsReloading)
+        {
+            StartCoroutine(Reload());
+        }
+    }
+    #endregion
+
+    #region Firing
     protected virtual IEnumerator FireWeapon()
     {
         m_CanFire = false;
@@ -77,6 +97,10 @@ public class WeaponScript : MonoBehaviour
 
     protected virtual void Fire()
     {
+        if (m_CurrentMagazineAmmo <= 0) return;
+        
+        m_CurrentMagazineAmmo--;
+
         GameObject bullet = Instantiate(m_WeaponData.m_BulletPrefab, m_FirePoint.position, m_FirePoint.rotation);
 
         Vector3 parentVelocity = Vector3.zero;
@@ -88,5 +112,40 @@ public class WeaponScript : MonoBehaviour
 
         bullet.GetComponent<Rigidbody>().linearVelocity = parentVelocity + m_FirePoint.forward * m_WeaponData.m_BulletVelocity;
         bullet.GetComponent<BulletScript>().m_Damage = m_WeaponData.m_BulletDamage;
+    }
+
+    private IEnumerator Reload()
+    {
+        if (m_CurrentTotalAmmo <= 1 || m_CurrentMagazineAmmo >= m_WeaponData.m_MagazineSize) yield break;
+
+        m_IsReloading = true;
+
+        yield return new WaitForSeconds(m_WeaponData.m_ReloadTime);
+
+        m_IsReloading = false;
+
+        // If the player has less ammo than the magazine size, just fill the magazine with the remaining ammo. 
+        // Otherwise, fill the magazine from the total ammo.
+        if (m_WeaponData.m_MagazineSize > m_CurrentTotalAmmo)
+        {
+            m_CurrentMagazineAmmo = m_CurrentTotalAmmo;
+            m_CurrentTotalAmmo = 0;
+        }
+        else
+        {
+            m_CurrentTotalAmmo -= m_WeaponData.m_MagazineSize - m_CurrentMagazineAmmo;
+            m_CurrentMagazineAmmo = m_WeaponData.m_MagazineSize;
+        }
+    }
+    #endregion
+
+    public void AddAmmo(int amount)
+    {
+        m_CurrentTotalAmmo += amount;
+
+        if (m_CurrentTotalAmmo > m_WeaponData.m_MaxAmmo)
+        {
+            m_CurrentTotalAmmo = m_WeaponData.m_MaxAmmo;
+        }
     }
 }

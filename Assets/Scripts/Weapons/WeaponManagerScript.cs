@@ -39,7 +39,9 @@ public class WeaponManagerScript : MonoBehaviour
 
     void Update()
     {
-        if (m_Input.m_MouseWheel != 0)
+        bool isReloading = m_Weapons[m_CurrentWeaponIndex].GetComponent<WeaponScript>().m_IsReloading;
+
+        if (m_Input.m_MouseWheel != 0 && !isReloading)
         {
             int index = m_CurrentWeaponIndex + (int)m_Input.m_MouseWheel;
             if (index < 0)
@@ -64,5 +66,15 @@ public class WeaponManagerScript : MonoBehaviour
         m_UIImageReference.sprite = m_WeaponSprites[m_CurrentWeaponIndex];
         
         Debug.Log("Switched to weapon " + m_CurrentWeaponIndex);
+    }
+
+    public void AddAmmoCurrentWeapon(int amount)
+    {
+        m_Weapons[m_CurrentWeaponIndex].GetComponent<WeaponScript>().AddAmmo(amount);
+    }
+
+    public WeaponScript GetCurrentWeaponScript()
+    {
+        return m_Weapons[m_CurrentWeaponIndex].GetComponent<WeaponScript>();
     }
 }

@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 3112357835266194730}
   m_Layer: 6
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Entity
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -120,7 +120,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_StartingHealth: 80
   m_MaxHealth: 100
-  m_CurrentHealth: 0
   m_CanRegen: 1
   m_StartRegen: 1
   m_RegenRate: 1
@@ -167,6 +166,7 @@ MonoBehaviour:
   m_JumpHeld: 0
   m_JumpReleased: 0
   m_FireHeld: 0
+  m_ReloadPressed: 0
   m_MouseWheel: 0
   m_ShiftLockPressed: 0
   m_MoveCameraHeld: 0

@@ -12,6 +12,7 @@ public class InputManager : MonoBehaviour
     [HideInInspector] public bool m_JumpReleased;
 
     [HideInInspector] public bool m_FireHeld;
+    [HideInInspector] public bool m_ReloadPressed;
     [HideInInspector] public float m_MouseWheel;
     
     void Update()
