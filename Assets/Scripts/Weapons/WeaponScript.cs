@@ -4,11 +4,13 @@ using System.Collections;
 public class WeaponScript : MonoBehaviour
 {
     public WeaponData m_WeaponData; // Public so we can set it in the inspector AND access the sprite in other scripts
+    [Tooltip("The offset of the weapon from the player's position.")]
     [SerializeField] protected Vector3 m_WeaponOffset;
     protected InputManager m_InputManager;
 
     [Header("Firing")]
     [SerializeField] protected Transform m_FirePoint;
+    [Tooltip("Should the instantiated bullets inherit the parent's velocity?")]
     [SerializeField] private bool m_AddParentVelocity = false;
     protected bool m_CanFire;
 

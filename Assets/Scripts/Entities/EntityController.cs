@@ -5,8 +5,8 @@ using UnityEngine;
 public abstract class EntityController : MonoBehaviour
 {
     #region Variables
-    public HealthScript m_HealthScript;
-    public GroundSaverScript m_GroundSaverScript;
+    [HideInInspector] public HealthScript m_HealthScript;
+    [HideInInspector] public GroundSaverScript m_GroundSaverScript;
     #endregion
 
     #region Main Methods

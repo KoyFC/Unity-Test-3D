@@ -6,24 +6,26 @@ public class HealthScript : MonoBehaviour
 {
     #region Variables
     [Header("Health")]
-    [SerializeField][Min(0)] private int m_StartingHealth = 80;
-    [SerializeField][Min(0)] internal int m_MaxHealth = 100;
-    [Min(0)] public int m_CurrentHealth;
+    [SerializeField, Min(0)] private int m_StartingHealth = 80;
+    [SerializeField, Min(0)] internal int m_MaxHealth = 100;
+    [Min(0)] private int m_CurrentHealth;
 
     [Header("Regeneration")]
-    public bool m_CanRegen = true;
-    public bool m_StartRegen = true;
-    [SerializeField][Min(0)] private int m_RegenRate = 1;
-    [SerializeField][Min(0)] private float m_RegenDelay = 1f;
+    [Tooltip("Is the regeneration system enabled?")]
+    [SerializeField] private bool m_CanRegen = true;
+    [Tooltip("Should the health start regenerating? (Only works if m_CanRegen is true)")]
+    [SerializeField] private bool m_StartRegen = true;
+    [SerializeField, Min(0)] private int m_RegenRate = 1;
+    [SerializeField, Min(0)] private float m_RegenDelay = 1f;
 
     [Header("Invincibility")]
     [SerializeField] private GameObject m_ShieldPrefab;
     [SerializeField] private Vector3 m_ShieldScale = new Vector3(2.5f, 2.5f, 2.5f);
     [SerializeField] private Color m_FlashingColor = Color.white;
     private Color m_OriginalColor;
-    [SerializeField][Min(0)] private int m_FlashCount = 3;
-    [SerializeField][Min(0)] private float m_FlashDuration = 0.1f;
-    [SerializeField][Min(0)] private float m_InvincibilityTime = 0.5f;
+    [SerializeField, Min(0)] private int m_FlashCount = 3;
+    [SerializeField, Min(0)] private float m_FlashDuration = 0.1f;
+    [SerializeField, Min(0)] private float m_InvincibilityTime = 0.5f;
     private bool m_IsInvincible;
 
     [Header("Damage")]

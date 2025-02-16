@@ -19,9 +19,9 @@ MonoBehaviour:
   m_MaxAmmo: 120
   m_ReloadTime: 1.5
   m_FireMode: 1
+  m_FireRate: 0.1
   m_BurstAmount: 3
   m_CooldownTime: 0.5
-  m_FireRate: 0.1
   m_BulletPrefab: {fileID: 2850252973846066532, guid: 81d53e49b18ea2846a36b293fd77dcc7, type: 3}
   m_BulletDamage: 5
   m_BulletVelocity: 25
