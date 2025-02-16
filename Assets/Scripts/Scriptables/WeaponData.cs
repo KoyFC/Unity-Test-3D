@@ -7,7 +7,8 @@ public class WeaponData : ScriptableObject
     {
         Manual,
         Automatic,
-        Burst
+        ManualBurst,
+        AutomaticBurst
     }
 
     [Header("Weapon")]

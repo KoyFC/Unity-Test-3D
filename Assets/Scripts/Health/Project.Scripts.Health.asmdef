@@ -1,10 +1,7 @@
 {
-    "name": "Project.Scripts.Player",
+    "name": "Project.Scripts.Health",
     "rootNamespace": "",
-    "references": [
-        "GUID:5e099b3fc91286745a1c0c5a7e266f90",
-        "GUID:4307f53044263cf4b835bd812fc161a4"
-    ],
+    "references": [],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,

@@ -64,7 +64,7 @@ public class PlayerInputManager : InputManager
 
             if (m_MouseWheel != 0)
             {
-                m_MouseWheel = m_MouseWheel > 0 ? 1 : -1;
+                m_MouseWheel = m_MouseWheel < 0 ? 1 : -1;
             }
         }
     }

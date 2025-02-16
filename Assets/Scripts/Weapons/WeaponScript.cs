@@ -50,14 +50,23 @@ public class WeaponScript : MonoBehaviour
                 yield return new WaitUntil(() => !m_InputManager.m_FireHeld);
                 break;
 
-            case WeaponData.FireMode.Burst:
+            case WeaponData.FireMode.ManualBurst:
                 for (int i = 0; i < m_WeaponData.m_BurstAmount - 1; i++)
                 {
                     yield return new WaitForSeconds(m_WeaponData.m_FireRate);
                     Fire();
                 }
                 yield return new WaitForSeconds(m_WeaponData.m_CooldownTime);
-                //yield return new WaitUntil(() => !m_InputManager.m_FireHeld);
+                yield return new WaitUntil(() => !m_InputManager.m_FireHeld);
+                break;
+
+            case WeaponData.FireMode.AutomaticBurst:
+                for (int i = 0; i < m_WeaponData.m_BurstAmount - 1; i++)
+                {
+                    Fire();
+                    yield return new WaitForSeconds(m_WeaponData.m_FireRate);
+                }
+                yield return new WaitForSeconds(m_WeaponData.m_CooldownTime);
                 break;
         }
         

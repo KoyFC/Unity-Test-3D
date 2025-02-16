@@ -13,7 +13,7 @@ public class PlayerCameraController : MonoBehaviour
 
         m_InputAxisController.enabled = m_PlayerController.m_MovementScript.ShiftLock;
 
-        Cursor.lockState = Cursor.lockState = CursorLockMode.Locked;
+        Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
 
@@ -50,10 +50,7 @@ public class PlayerCameraController : MonoBehaviour
         {
             m_InputAxisController.enabled = shiftLock;
         }
-        else if (!shiftLock)
-        {
-            m_InputAxisController.enabled = true;
-        }
+        
 #endif
     }
 

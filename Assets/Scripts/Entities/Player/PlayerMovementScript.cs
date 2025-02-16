@@ -27,9 +27,6 @@ public class PlayerMovementScript : MonoBehaviour
     [Header("Rotation")]
     [SerializeField] private float m_RotationSpeed = 40f;
     internal bool ShiftLock { get; set; }
-
-    private bool IsGrounded { get; set; }
-
     #endregion
 
     #region Main Methods
@@ -46,8 +43,6 @@ public class PlayerMovementScript : MonoBehaviour
 
     private void Update()
     {
-        IsGrounded = Physics.Raycast(transform.position, Vector3.down, 1.1f);
-
         if (PlayerInputManager.Instance.m_SprintPressed && m_CurrentSpeed == m_WalkingSpeed)
         {
             m_CurrentSpeed = m_RunningSpeedMultiplier * m_WalkingSpeed;
@@ -152,7 +147,7 @@ public class PlayerMovementScript : MonoBehaviour
 
     private void HandleCoyoteTime()
     {
-        if (IsGrounded && !m_CoyoteTimeActive)
+        if (m_PlayerController.m_GroundSaverScript.IsGrounded && !m_CoyoteTimeActive)
         {
             StartCoroutine(CoyoteTimeCoroutine());
         }

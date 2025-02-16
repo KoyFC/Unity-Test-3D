@@ -1,8 +1,9 @@
 {
-    "name": "Project.Scripts.Weapons",
+    "name": "Project.Scripts.Player",
     "rootNamespace": "",
     "references": [
-        "GUID:5e099b3fc91286745a1c0c5a7e266f90",
+        "GUID:4307f53044263cf4b835bd812fc161a4",
+        "GUID:568da5ceaa8fc6442b27357d948fa1ec",
         "GUID:44d897366c2e0d342b845a383b0b5d1b",
         "GUID:66d1df81e5f0feb4fb187e3b1a066c0e"
     ],

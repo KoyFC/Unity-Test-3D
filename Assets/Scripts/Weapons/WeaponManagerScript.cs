@@ -31,7 +31,7 @@ public class WeaponManagerScript : MonoBehaviour
     void Start()
     {
         m_Input = GetComponent<InputManager>();
-        m_UIImageReference.sprite = m_Weapons[m_CurrentWeaponIndex].GetComponent<WeaponScript>().m_WeaponData.m_WeaponSprite;
+        m_UIImageReference.sprite = m_WeaponSprites[m_CurrentWeaponIndex];
     }
 
     void Update()
@@ -50,11 +50,6 @@ public class WeaponManagerScript : MonoBehaviour
 
             SwitchWeapon(index);
         }
-    }
-
-    public GameObject GetCurrentWeapon()
-    {
-        return m_Weapons[m_CurrentWeaponIndex];
     }
 
     void SwitchWeapon(int index)

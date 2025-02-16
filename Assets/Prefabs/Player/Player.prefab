@@ -9,12 +9,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8462976914114576767}
-  - component: {fileID: 4086106867251654004}
   - component: {fileID: 7050011453669738987}
   - component: {fileID: 8185380162917657678}
   - component: {fileID: 7921192518497271031}
   - component: {fileID: 246184483150683152}
   - component: {fileID: 1746404660134230172}
+  - component: {fileID: 4086106867251654004}
   - component: {fileID: 5631168095239282692}
   - component: {fileID: 6361870575118222297}
   - component: {fileID: 4127088110165302249}
@@ -43,20 +43,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4086106867251654004
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4277810785178303108}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 08842ed1b3305d04ea30a37376fca297, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SaveFrequency: 3.5
-  m_MarkerPrefab: {fileID: 369635972209610162, guid: 155002cb5f24e594fb2b60a850156403, type: 3}
 --- !u!114 &7050011453669738987
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -71,6 +57,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_WeaponPrefabs:
   - {fileID: 1601714596500871854, guid: 98b903ce5cb1d9646b57b01922dc5f77, type: 3}
+  - {fileID: 1601714596500871854, guid: 987f3c0ca8b7a3241882192dd95b3dc3, type: 3}
   - {fileID: 1868190559307203236, guid: 75ddbe4469fd6b94d9fea72bac17bcd3, type: 3}
   m_CurrentWeaponIndex: 0
   m_UIImageReference: {fileID: 0}
@@ -86,6 +73,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74b944e59d43ae4439e6929375df50ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_HealthScript: {fileID: 0}
 --- !u!114 &7921192518497271031
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -143,6 +131,22 @@ MonoBehaviour:
   m_FlashDuration: 0.1
   m_InvincibilityTime: 0.5
   m_SpeedMultiplierWhenHit: 0
+--- !u!114 &4086106867251654004
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4277810785178303108}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08842ed1b3305d04ea30a37376fca297, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SaveFrequency: 3.5
+  m_SavePosition: 1
+  m_MarkerPrefab: {fileID: 369635972209610162, guid: 155002cb5f24e594fb2b60a850156403, type: 3}
+  m_SpawnMarker: 1
 --- !u!114 &5631168095239282692
 MonoBehaviour:
   m_ObjectHideFlags: 0

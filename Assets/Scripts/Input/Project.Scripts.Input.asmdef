@@ -1,10 +1,8 @@
 {
-    "name": "Project.Scripts.Weapons",
+    "name": "Project.Scripts.Input",
     "rootNamespace": "",
     "references": [
-        "GUID:5e099b3fc91286745a1c0c5a7e266f90",
-        "GUID:44d897366c2e0d342b845a383b0b5d1b",
-        "GUID:66d1df81e5f0feb4fb187e3b1a066c0e"
+        "Unity.InputSystem"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
