@@ -58,10 +58,6 @@ public class GroundSaverScript : MonoBehaviour
             yield return new WaitUntil(() => IsGrounded);
 
             m_LastGroundPosition = transform.position;
-
-            #if UNITY_EDITOR
-            Debug.Log("Ground saved at: " + m_LastGroundPosition);
-            #endif
             
             if (m_SpawnMarker)
             {

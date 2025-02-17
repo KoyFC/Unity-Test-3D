@@ -64,8 +64,6 @@ public class WeaponManagerScript : MonoBehaviour
         m_Weapons[m_CurrentWeaponIndex].SetActive(true);
 
         m_UIImageReference.sprite = m_WeaponSprites[m_CurrentWeaponIndex];
-        
-        Debug.Log("Switched to weapon " + m_CurrentWeaponIndex);
     }
 
     public void AddAmmoCurrentWeapon(int amount)

@@ -23,6 +23,7 @@ public class PlayerMovementScript : MonoBehaviour
     [SerializeField] private float m_JumpBufferTime = 0.5f;
     private bool m_CoyoteTimeActive;
     private bool m_JumpBuffered;
+    private bool m_HasJumped;
 
     [Header("Rotation")]
     [SerializeField] private float m_RotationSpeed = 40f;
@@ -113,7 +114,7 @@ public class PlayerMovementScript : MonoBehaviour
 
     private void HandleJump()
     {
-        if (m_CoyoteTimeActive && m_JumpBuffered)
+        if (m_CoyoteTimeActive && m_JumpBuffered && !m_HasJumped)
         {
             m_JumpBuffered = false;
             m_CoyoteTimeActive = false;
@@ -138,10 +139,16 @@ public class PlayerMovementScript : MonoBehaviour
         // Reducing the jump height if the jump button is released
         if (PlayerInputManager.Instance.m_JumpReleased && m_Rigidbody.linearVelocity.y > 0)
         {
+            m_HasJumped = true;
+
             m_Rigidbody.linearVelocity = new Vector3(
                 m_Rigidbody.linearVelocity.x,
                 m_Rigidbody.linearVelocity.y * 0.5f,
                 m_Rigidbody.linearVelocity.z);
+        }
+        else if (m_HasJumped && m_PlayerController.m_GroundSaverScript.IsGrounded)
+        {
+            m_HasJumped = false;
         }
     }
 
