@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(WeaponManagerScript))]
-public class WeaponReloadBarScript : MonoBehaviour
+public class WeaponAmmoBarsScript : MonoBehaviour
 {
     #region Variables
     [SerializeField] private Slider m_MagazineAmmoSlider;
