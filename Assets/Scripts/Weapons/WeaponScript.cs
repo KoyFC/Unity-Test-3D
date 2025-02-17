@@ -1,3 +1,4 @@
+#define AUTO_RELOAD
 using UnityEngine;
 using System.Collections;
 using System;
@@ -102,10 +103,17 @@ public class WeaponScript : MonoBehaviour
 
     protected virtual void Fire()
     {
-        if (m_CurrentMagazineAmmo <= 0) return;
-        
         if (!m_InfiniteAmmo)
         {
+            if (m_CurrentMagazineAmmo <= 0)
+            {
+                #if AUTO_RELOAD
+                StartCoroutine(Reload());
+                #endif
+
+                return;
+            }
+        
             m_CurrentMagazineAmmo--;
             InvokeEvents();
         }
@@ -148,7 +156,7 @@ public class WeaponScript : MonoBehaviour
 
         InvokeEvents();
     }
-    #endregion
+#endregion
 
     private void InvokeEvents()
     {

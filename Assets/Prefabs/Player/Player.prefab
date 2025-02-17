@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8462976914114576767}
   - component: {fileID: 7050011453669738987}
+  - component: {fileID: 6681336250208817984}
   - component: {fileID: 8185380162917657678}
   - component: {fileID: 7921192518497271031}
   - component: {fileID: 246184483150683152}
@@ -61,6 +62,20 @@ MonoBehaviour:
   - {fileID: 1868190559307203236, guid: 75ddbe4469fd6b94d9fea72bac17bcd3, type: 3}
   m_CurrentWeaponIndex: 0
   m_UIImageReference: {fileID: 0}
+--- !u!114 &6681336250208817984
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4277810785178303108}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2aa4236194ccc34da339f647acce897, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_MagazineAmmoSlider: {fileID: 0}
+  m_TotalAmmoSlider: {fileID: 0}
 --- !u!114 &8185380162917657678
 MonoBehaviour:
   m_ObjectHideFlags: 0

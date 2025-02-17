@@ -1283,25 +1283,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1715080314}
   m_CullTransparentMesh: 1
---- !u!1 &1938514494 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4277810785178303108, guid: ff084e4bb157534408dc55adf64c2686, type: 3}
-  m_PrefabInstance: {fileID: 4775985215236335086}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1938514507
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1938514494}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b2aa4236194ccc34da339f647acce897, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_MagazineAmmoSlider: {fileID: 476182990}
-  m_TotalAmmoSlider: {fileID: 330123117}
 --- !u!1 &1961804794
 GameObject:
   m_ObjectHideFlags: 0
@@ -1766,6 +1747,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 6681336250208817984, guid: ff084e4bb157534408dc55adf64c2686, type: 3}
+      propertyPath: m_TotalAmmoSlider
+      value: 
+      objectReference: {fileID: 330123117}
+    - target: {fileID: 6681336250208817984, guid: ff084e4bb157534408dc55adf64c2686, type: 3}
+      propertyPath: m_MagazineAmmoSlider
+      value: 
+      objectReference: {fileID: 476182990}
     - target: {fileID: 7050011453669738987, guid: ff084e4bb157534408dc55adf64c2686, type: 3}
       propertyPath: m_UIImageReference
       value: 
@@ -1817,10 +1806,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 4277810785178303108, guid: ff084e4bb157534408dc55adf64c2686, type: 3}
-      insertIndex: 2
-      addedObject: {fileID: 1938514507}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ff084e4bb157534408dc55adf64c2686, type: 3}
 --- !u!1001 &8692863583763360716
 PrefabInstance:
