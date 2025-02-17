@@ -7,7 +7,6 @@ public class HealthBarScript : MonoBehaviour
     private Slider m_Slider;
     private HealthScript m_HealthScript;
 
-
     void Awake()
     {
         m_HealthScript = GetComponent<HealthScript>();

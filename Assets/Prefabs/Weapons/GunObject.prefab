@@ -51,6 +51,10 @@ MonoBehaviour:
   m_WeaponData: {fileID: 11400000, guid: 326238bf148adc64aac232f3c1a60bab, type: 2}
   m_WeaponOffset: {x: 0.45, y: 0, z: 0.45}
   m_FirePoint: {fileID: 1251726388367838914}
+  m_AddParentVelocity: 0
+  m_InfiniteAmmo: 0
+  m_CurrentMagazineAmmo: 0
+  m_CurrentTotalAmmo: 0
 --- !u!33 &4972279568135388426
 MeshFilter:
   m_ObjectHideFlags: 0

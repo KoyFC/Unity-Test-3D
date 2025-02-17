@@ -1,12 +1,16 @@
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class WeaponManagerScript : MonoBehaviour
 {
+    #region Variables
     [Header("Weapons")]
     [SerializeField] private List<GameObject> m_WeaponPrefabs;
     private List<GameObject> m_Weapons;
+    private List<WeaponScript> m_WeaponScripts;
     private List<Sprite> m_WeaponSprites;
     [SerializeField] private int m_CurrentWeaponIndex = 0;
     private InputManager m_Input;
@@ -14,9 +18,14 @@ public class WeaponManagerScript : MonoBehaviour
     [Header("UI")]
     [SerializeField] private Image m_UIImageReference;
 
+    public event Action<int, int> OnAllAmmoUpdate;
+    #endregion
+
+    #region Main Methods
     void Awake()
     {
         m_Weapons = new List<GameObject>();
+        m_WeaponScripts = new List<WeaponScript>();
         m_WeaponSprites = new List<Sprite>();
 
         for (int i = 0; i < m_WeaponPrefabs.Count; i++)
@@ -24,11 +33,14 @@ public class WeaponManagerScript : MonoBehaviour
             m_Weapons.Add(Instantiate(m_WeaponPrefabs[i], transform));
             m_Weapons[i].SetActive(false);
 
-            m_WeaponSprites.Add(m_Weapons[i].GetComponent<WeaponScript>().m_WeaponData.m_WeaponSprite);
+            m_WeaponScripts.Add(m_Weapons[i].GetComponent<WeaponScript>());
+            m_WeaponSprites.Add(m_WeaponScripts[i].m_WeaponData.m_WeaponSprite);
         }
 
         m_CurrentWeaponIndex = Mathf.Clamp(m_CurrentWeaponIndex, 0, m_WeaponPrefabs.Count - 1);
         m_Weapons[m_CurrentWeaponIndex].SetActive(true);
+
+        SubscribeEventsCurrentWeapon();
     }
 
     void Start()
@@ -39,7 +51,7 @@ public class WeaponManagerScript : MonoBehaviour
 
     void Update()
     {
-        bool isReloading = m_Weapons[m_CurrentWeaponIndex].GetComponent<WeaponScript>().m_IsReloading;
+        bool isReloading = m_WeaponScripts[m_CurrentWeaponIndex].m_IsReloading;
 
         if (m_Input.m_MouseWheel != 0 && !isReloading)
         {
@@ -57,22 +69,67 @@ public class WeaponManagerScript : MonoBehaviour
         }
     }
 
+    private void OnDestroy()
+    {
+        UnsubscribeEventsCurrentWeapon();
+    }
+    #endregion
+
+    #region Event Subscription
+    private void SubscribeEventsCurrentWeapon()
+    {
+        m_WeaponScripts[m_CurrentWeaponIndex].OnAmmoChanged += OnAllAmmoUpdate;
+    }
+
+    private void UnsubscribeEventsCurrentWeapon()
+    {
+        m_WeaponScripts[m_CurrentWeaponIndex].OnAmmoChanged -= OnAllAmmoUpdate;
+    }
+
+    private void UpdateAllAmmo()
+    {
+        OnAllAmmoUpdate?.Invoke(
+            m_WeaponScripts[m_CurrentWeaponIndex].m_CurrentMagazineAmmo,
+            m_WeaponScripts[m_CurrentWeaponIndex].m_CurrentTotalAmmo);
+    }
+    #endregion
+
+    #region Helper Methods
     void SwitchWeapon(int index)
     {
+        // First we unsubscribe from the events of the current weapon
+        UnsubscribeEventsCurrentWeapon();
         m_Weapons[m_CurrentWeaponIndex].SetActive(false);
+
         m_CurrentWeaponIndex = index;
         m_Weapons[m_CurrentWeaponIndex].SetActive(true);
+        // Then we subscribe to the events of the new weapon to keep track of its ammo
+        SubscribeEventsCurrentWeapon();
 
         m_UIImageReference.sprite = m_WeaponSprites[m_CurrentWeaponIndex];
+
+        UpdateAllAmmo();
     }
 
     public void AddAmmoCurrentWeapon(int amount)
     {
         m_Weapons[m_CurrentWeaponIndex].GetComponent<WeaponScript>().AddAmmo(amount);
+
+        UpdateAllAmmo();
     }
+    #endregion
 
     public WeaponScript GetCurrentWeaponScript()
     {
-        return m_Weapons[m_CurrentWeaponIndex].GetComponent<WeaponScript>();
+        return m_WeaponScripts[m_CurrentWeaponIndex];
+    }
+
+    public int[] GetCurrentWeaponAmmo()
+    {
+        int[] ammo = new int[2];
+        ammo[0] = m_WeaponScripts[m_CurrentWeaponIndex].m_CurrentMagazineAmmo;
+        ammo[1] = m_WeaponScripts[m_CurrentWeaponIndex].m_CurrentTotalAmmo;
+
+        return ammo;
     }
 }
