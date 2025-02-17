@@ -34,23 +34,11 @@ public class WeaponReloadBarScript : MonoBehaviour
     private void SubscribeAllEvents()
     {
         m_WeaponManagerScript.OnAllAmmoUpdate += UpdateAmmoBars;
-
-        // Creating a variable to reduce the amount of Get calls
-        WeaponScript currentWeaponScript = m_WeaponManagerScript.GetCurrentWeaponScript();
-
-        currentWeaponScript.OnMagazineAmmoChanged += UpdateMagazineAmmoBar;
-        currentWeaponScript.OnTotalAmmoChanged += UpdateTotalAmmoBar;
     }
 
     private void UnsubscribeAllEvents()
     {
         m_WeaponManagerScript.OnAllAmmoUpdate -= UpdateAmmoBars;
-
-        // Creating a variable to reduce the amount of Get calls
-        WeaponScript currentWeaponScript = m_WeaponManagerScript.GetCurrentWeaponScript();
-
-        currentWeaponScript.OnMagazineAmmoChanged -= UpdateMagazineAmmoBar;
-        currentWeaponScript.OnTotalAmmoChanged -= UpdateTotalAmmoBar;
     }
     #endregion
 
@@ -72,7 +60,7 @@ public class WeaponReloadBarScript : MonoBehaviour
         m_TotalAmmoSlider.maxValue = currentWeaponScript.m_WeaponData.m_MaxAmmo;
     }
 
-    // Method that updates the current magazine ammo
+    // Method that updates the current magazine ammo and activates the slider if needed
     private void UpdateMagazineAmmoBar(int currentMagazineAmmo)
     {
         m_MagazineAmmoSlider.value = currentMagazineAmmo;
@@ -83,7 +71,7 @@ public class WeaponReloadBarScript : MonoBehaviour
         }
     }
 
-    // Method that updates the current total ammo
+    // Method that updates the current total ammo and activates the slider if needed
     private void UpdateTotalAmmoBar(int currentTotalAmmo)
     {
         m_TotalAmmoSlider.value = currentTotalAmmo;

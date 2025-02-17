@@ -23,9 +23,7 @@ public class WeaponScript : MonoBehaviour
     public int m_CurrentTotalAmmo;
     internal bool m_IsReloading;
 
-    public event Action<int> OnMagazineAmmoChanged;
-    public event Action<int> OnTotalAmmoChanged;
-    public event Action<int, int> OnAmmoChanged;
+    public event Action OnAmmoChanged;
     #endregion
 
     #region Main Methods
@@ -152,11 +150,9 @@ public class WeaponScript : MonoBehaviour
     }
     #endregion
 
-    public void InvokeEvents()
+    private void InvokeEvents()
     {
-        OnMagazineAmmoChanged?.Invoke(m_CurrentMagazineAmmo);
-        OnTotalAmmoChanged?.Invoke(m_CurrentTotalAmmo);
-        OnAmmoChanged?.Invoke(m_CurrentMagazineAmmo, m_CurrentTotalAmmo);
+        OnAmmoChanged?.Invoke();
     }
 
     public void AddAmmo(int amount)

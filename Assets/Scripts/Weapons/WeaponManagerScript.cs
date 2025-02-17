@@ -78,19 +78,20 @@ public class WeaponManagerScript : MonoBehaviour
     #region Event Subscription
     private void SubscribeEventsCurrentWeapon()
     {
-        m_WeaponScripts[m_CurrentWeaponIndex].OnAmmoChanged += OnAllAmmoUpdate;
+        m_WeaponScripts[m_CurrentWeaponIndex].OnAmmoChanged += UpdateAllAmmo;
     }
 
     private void UnsubscribeEventsCurrentWeapon()
     {
-        m_WeaponScripts[m_CurrentWeaponIndex].OnAmmoChanged -= OnAllAmmoUpdate;
+        m_WeaponScripts[m_CurrentWeaponIndex].OnAmmoChanged -= UpdateAllAmmo;
     }
 
+    // Method that invokes its own event to update the ammo UI
     private void UpdateAllAmmo()
     {
-        OnAllAmmoUpdate?.Invoke(
-            m_WeaponScripts[m_CurrentWeaponIndex].m_CurrentMagazineAmmo,
-            m_WeaponScripts[m_CurrentWeaponIndex].m_CurrentTotalAmmo);
+        int[] ammo = GetCurrentWeaponAmmo();
+
+        OnAllAmmoUpdate?.Invoke(ammo[0], ammo[1]);
     }
     #endregion
 
