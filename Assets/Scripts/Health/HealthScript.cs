@@ -7,7 +7,7 @@ public class HealthScript : MonoBehaviour
     #region Variables
     [Header("Health")]
     [SerializeField, Min(0)] private int m_StartingHealth = 80;
-    [SerializeField, Min(0)] internal int m_MaxHealth = 100;
+    [SerializeField, Min(0)] public int m_MaxHealth = 100;
     [Min(0)] private int m_CurrentHealth;
 
     [Header("Regeneration")]

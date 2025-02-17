@@ -25,6 +25,7 @@ public class WeaponScript : MonoBehaviour
     internal bool m_IsReloading;
 
     public event Action OnAmmoChanged;
+    public event Action OnReload;
     #endregion
 
     #region Main Methods
@@ -46,7 +47,7 @@ public class WeaponScript : MonoBehaviour
     {
         transform.localPosition = m_WeaponOffset;
 
-        InvokeEvents();
+        OnAmmoChanged?.Invoke();
     }
 
     void Update()
@@ -115,7 +116,7 @@ public class WeaponScript : MonoBehaviour
             }
         
             m_CurrentMagazineAmmo--;
-            InvokeEvents();
+            OnAmmoChanged?.Invoke();
         }
 
         GameObject bullet = Instantiate(m_WeaponData.m_BulletPrefab, m_FirePoint.position, m_FirePoint.rotation);
@@ -136,6 +137,7 @@ public class WeaponScript : MonoBehaviour
         if (m_CurrentTotalAmmo <= 1 || m_CurrentMagazineAmmo >= m_WeaponData.m_MagazineSize) yield break;
 
         m_IsReloading = true;
+        OnReload?.Invoke();
 
         yield return new WaitForSeconds(m_WeaponData.m_ReloadTime);
 
@@ -154,16 +156,11 @@ public class WeaponScript : MonoBehaviour
             m_CurrentMagazineAmmo = m_WeaponData.m_MagazineSize;
         }
 
-        InvokeEvents();
-    }
-#endregion
-
-    private void InvokeEvents()
-    {
         OnAmmoChanged?.Invoke();
     }
+    #endregion
 
-    public void AddAmmo(int amount)
+    internal void AddAmmo(int amount)
     {
         m_CurrentTotalAmmo += amount;
 

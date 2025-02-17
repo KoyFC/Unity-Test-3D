@@ -19,6 +19,7 @@ public class WeaponManagerScript : MonoBehaviour
     [SerializeField] private Image m_UIImageReference;
 
     public event Action<int, int> OnAllAmmoUpdate;
+    public event Action<float> OnReload;
     #endregion
 
     #region Main Methods
@@ -79,11 +80,13 @@ public class WeaponManagerScript : MonoBehaviour
     private void SubscribeEventsCurrentWeapon()
     {
         m_WeaponScripts[m_CurrentWeaponIndex].OnAmmoChanged += UpdateAllAmmo;
+        m_WeaponScripts[m_CurrentWeaponIndex].OnReload += SendReload;
     }
 
     private void UnsubscribeEventsCurrentWeapon()
     {
         m_WeaponScripts[m_CurrentWeaponIndex].OnAmmoChanged -= UpdateAllAmmo;
+        m_WeaponScripts[m_CurrentWeaponIndex].OnReload -= SendReload;
     }
 
     // Method that invokes its own event to update the ammo UI
@@ -92,6 +95,11 @@ public class WeaponManagerScript : MonoBehaviour
         int[] ammo = GetCurrentWeaponAmmo();
 
         OnAllAmmoUpdate?.Invoke(ammo[0], ammo[1]);
+    }
+
+    private void SendReload()
+    {
+        OnReload?.Invoke(m_WeaponScripts[m_CurrentWeaponIndex].m_WeaponData.m_ReloadTime);
     }
     #endregion
 
@@ -114,7 +122,7 @@ public class WeaponManagerScript : MonoBehaviour
 
     public void AddAmmoCurrentWeapon(int amount)
     {
-        m_Weapons[m_CurrentWeaponIndex].GetComponent<WeaponScript>().AddAmmo(amount);
+        m_WeaponScripts[m_CurrentWeaponIndex].AddAmmo(amount);
 
         UpdateAllAmmo();
     }

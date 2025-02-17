@@ -7,38 +7,26 @@ public class WeaponAmmoBarsScript : MonoBehaviour
     #region Variables
     [SerializeField] private Slider m_MagazineAmmoSlider;
     [SerializeField] private Slider m_TotalAmmoSlider;
-    private WeaponManagerScript m_WeaponManagerScript;
+    private WeaponManagerScript m_WeaponManager;
     #endregion
 
     #region Main Methods
     void Start()
     {
-        m_WeaponManagerScript = GetComponent<WeaponManagerScript>();
+        m_WeaponManager = GetComponent<WeaponManagerScript>();
 
-        // First we subscribe to the events
-        SubscribeAllEvents();
+        // First we subscribe to the event
+        m_WeaponManager.OnAllAmmoUpdate += UpdateAmmoBars;
 
         // Then we set the max values of the sliders
         // If we don't do this, the sliders of the first weapon will not update correctly
-        int[] ammo = m_WeaponManagerScript.GetCurrentWeaponAmmo();
+        int[] ammo = m_WeaponManager.GetCurrentWeaponAmmo();
         UpdateAmmoBars(ammo[0], ammo[1]);
     }
 
     private void OnDestroy()
     {
-        UnsubscribeAllEvents();
-    }
-    #endregion
-
-    #region Event Subscription
-    private void SubscribeAllEvents()
-    {
-        m_WeaponManagerScript.OnAllAmmoUpdate += UpdateAmmoBars;
-    }
-
-    private void UnsubscribeAllEvents()
-    {
-        m_WeaponManagerScript.OnAllAmmoUpdate -= UpdateAmmoBars;
+        m_WeaponManager.OnAllAmmoUpdate -= UpdateAmmoBars;
     }
     #endregion
 
@@ -54,7 +42,7 @@ public class WeaponAmmoBarsScript : MonoBehaviour
     // Method that sets the max values of the sliders
     private void SetMaxAmmoValues()
     {
-        WeaponScript currentWeaponScript = m_WeaponManagerScript.GetCurrentWeaponScript();
+        WeaponScript currentWeaponScript = m_WeaponManager.GetCurrentWeaponScript();
 
         m_MagazineAmmoSlider.maxValue = currentWeaponScript.m_WeaponData.m_MagazineSize;
         m_TotalAmmoSlider.maxValue = currentWeaponScript.m_WeaponData.m_MaxAmmo;
@@ -65,7 +53,7 @@ public class WeaponAmmoBarsScript : MonoBehaviour
     {
         m_MagazineAmmoSlider.value = currentMagazineAmmo;
 
-        if (currentMagazineAmmo != m_WeaponManagerScript.GetCurrentWeaponScript().m_WeaponData.m_MagazineSize)
+        if (currentMagazineAmmo != m_WeaponManager.GetCurrentWeaponScript().m_WeaponData.m_MagazineSize)
         {
             m_MagazineAmmoSlider.gameObject.SetActive(true);
         }
@@ -76,7 +64,7 @@ public class WeaponAmmoBarsScript : MonoBehaviour
     {
         m_TotalAmmoSlider.value = currentTotalAmmo;
 
-        if (currentTotalAmmo != m_WeaponManagerScript.GetCurrentWeaponScript().m_WeaponData.m_MaxAmmo)
+        if (currentTotalAmmo != m_WeaponManager.GetCurrentWeaponScript().m_WeaponData.m_MaxAmmo)
         {
             m_TotalAmmoSlider.gameObject.SetActive(true);
         }
