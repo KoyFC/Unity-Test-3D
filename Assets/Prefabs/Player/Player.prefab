@@ -10,13 +10,13 @@ GameObject:
   m_Component:
   - component: {fileID: 8462976914114576767}
   - component: {fileID: 7050011453669738987}
-  - component: {fileID: 6681336250208817984}
-  - component: {fileID: 2058704136342112703}
   - component: {fileID: 8185380162917657678}
   - component: {fileID: 7921192518497271031}
   - component: {fileID: 246184483150683152}
   - component: {fileID: 1746404660134230172}
   - component: {fileID: 4086106867251654004}
+  - component: {fileID: 6681336250208817984}
+  - component: {fileID: 2058704136342112703}
   - component: {fileID: 5631168095239282692}
   - component: {fileID: 6361870575118222297}
   - component: {fileID: 4127088110165302249}
@@ -61,35 +61,9 @@ MonoBehaviour:
   - {fileID: 1601714596500871854, guid: 98b903ce5cb1d9646b57b01922dc5f77, type: 3}
   - {fileID: 1601714596500871854, guid: 987f3c0ca8b7a3241882192dd95b3dc3, type: 3}
   - {fileID: 1868190559307203236, guid: 75ddbe4469fd6b94d9fea72bac17bcd3, type: 3}
+  - {fileID: 1868190559307203236, guid: 7e73208419eabb646a5262f3f9929c06, type: 3}
   m_CurrentWeaponIndex: 0
   m_UIImageReference: {fileID: 0}
---- !u!114 &6681336250208817984
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4277810785178303108}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b2aa4236194ccc34da339f647acce897, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_MagazineAmmoSlider: {fileID: 0}
-  m_TotalAmmoSlider: {fileID: 0}
---- !u!114 &2058704136342112703
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4277810785178303108}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a9789200df28ef46ad06d4c5dbe94bb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Slider: {fileID: 0}
 --- !u!114 &8185380162917657678
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -176,6 +150,33 @@ MonoBehaviour:
   m_SavePosition: 1
   m_MarkerPrefab: {fileID: 369635972209610162, guid: 155002cb5f24e594fb2b60a850156403, type: 3}
   m_SpawnMarker: 1
+--- !u!114 &6681336250208817984
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4277810785178303108}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2aa4236194ccc34da339f647acce897, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_MagazineAmmoSlider: {fileID: 0}
+  m_TotalAmmoSlider: {fileID: 0}
+--- !u!114 &2058704136342112703
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4277810785178303108}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a9789200df28ef46ad06d4c5dbe94bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Slider: {fileID: 0}
 --- !u!114 &5631168095239282692
 MonoBehaviour:
   m_ObjectHideFlags: 0

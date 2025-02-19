@@ -9,14 +9,14 @@ public class WeaponScript : MonoBehaviour
     [Header("Weapon Data")]
     public WeaponData m_WeaponData; // Public so we can set it in the inspector AND access the sprite in other scripts
     [Tooltip("The offset of the weapon from the player's position.")]
-    [SerializeField] protected Vector3 m_WeaponOffset;
-    protected InputManager m_InputManager;
+    [SerializeField] private Vector3 m_WeaponOffset;
+    private InputManager m_InputManager;
 
     [Header("Firing")]
-    [SerializeField] protected Transform m_FirePoint;
+    [SerializeField] private Transform m_FirePoint;
     [Tooltip("Should the instantiated bullets inherit the parent's velocity?")]
     [SerializeField] private bool m_AddParentVelocity = false;
-    protected bool m_CanFire;
+    private bool m_CanFire;
 
     [Header("Ammo")]
     [SerializeField] private bool m_InfiniteAmmo = false;
@@ -65,7 +65,7 @@ public class WeaponScript : MonoBehaviour
     #endregion
 
     #region Firing
-    protected virtual IEnumerator FireWeapon()
+    private IEnumerator FireWeapon()
     {
         m_CanFire = false;
 
@@ -102,7 +102,7 @@ public class WeaponScript : MonoBehaviour
         m_CanFire = true;
     }
 
-    protected virtual void Fire()
+    private void Fire()
     {
         if (!m_InfiniteAmmo)
         {
@@ -134,7 +134,7 @@ public class WeaponScript : MonoBehaviour
 
     private IEnumerator Reload()
     {
-        if (m_CurrentTotalAmmo <= 1 || m_CurrentMagazineAmmo >= m_WeaponData.m_MagazineSize) yield break;
+        if (m_CurrentTotalAmmo <= 0 || m_CurrentMagazineAmmo >= m_WeaponData.m_MagazineSize) yield break;
 
         m_IsReloading = true;
         OnReload?.Invoke();
