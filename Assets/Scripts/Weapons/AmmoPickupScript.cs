@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class AmmoPickupScript : MonoBehaviour
 {
-    [SerializeField] private string m_AmmoID;
+    [SerializeField] private string m_AmmoID = "generic_ID";
     [SerializeField] private int m_AmmoAmount = 20;
 
     private void OnTriggerStay(Collider other)

@@ -5,9 +5,9 @@ using UnityEngine.UI;
 public class WeaponAmmoBarsScript : MonoBehaviour
 {
     #region Variables
-    [SerializeField] private Slider m_MagazineAmmoSlider;
-    [SerializeField] private Slider m_TotalAmmoSlider;
-    private WeaponManagerScript m_WeaponManager;
+    [SerializeField] private Slider m_MagazineAmmoSlider = null;
+    [SerializeField] private Slider m_TotalAmmoSlider = null;
+    private WeaponManagerScript m_WeaponManager = null;
     #endregion
 
     #region Main Methods

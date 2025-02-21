@@ -4,8 +4,8 @@ using UnityEngine.UI;
 [RequireComponent(typeof(HealthScript))]
 public class HealthBarScript : MonoBehaviour
 {
-    private Slider m_Slider;
-    private HealthScript m_HealthScript;
+    private Slider m_Slider = null;
+    private HealthScript m_HealthScript = null;
 
     void Awake()
     {

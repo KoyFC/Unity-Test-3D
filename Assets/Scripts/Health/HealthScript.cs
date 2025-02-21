@@ -8,7 +8,7 @@ public class HealthScript : MonoBehaviour
     [Header("Health")]
     [SerializeField, Min(0)] private int m_StartingHealth = 80;
     [SerializeField, Min(0)] public int m_MaxHealth = 100;
-    [Min(0)] private int m_CurrentHealth;
+    [Min(0)] private int m_CurrentHealth = 0;
 
     [Header("Regeneration")]
     [Tooltip("Is the regeneration system enabled?")]
@@ -19,14 +19,14 @@ public class HealthScript : MonoBehaviour
     [SerializeField, Min(0)] private float m_RegenDelay = 1f;
 
     [Header("Invincibility")]
-    [SerializeField] private GameObject m_ShieldPrefab;
+    [SerializeField] private GameObject m_ShieldPrefab = null;
     [SerializeField] private Vector3 m_ShieldScale = new Vector3(2.5f, 2.5f, 2.5f);
     [SerializeField] private Color m_FlashingColor = Color.white;
-    private Color m_OriginalColor;
+    private Color m_OriginalColor = Color.white;
     [SerializeField, Min(0)] private int m_FlashCount = 3;
     [SerializeField, Min(0)] private float m_FlashDuration = 0.1f;
     [SerializeField, Min(0)] private float m_InvincibilityTime = 0.5f;
-    private bool m_IsInvincible;
+    private bool m_IsInvincible = false;
 
     [Header("Damage")]
     [SerializeField] private float m_SpeedMultiplierWhenHit = 0.5f;
@@ -50,11 +50,6 @@ public class HealthScript : MonoBehaviour
         {
             m_StartRegen = false;
             Invoke(nameof(RegenHealth), m_RegenDelay);
-        }
-
-        if (m_CurrentHealth <= 0)
-        {
-            Destroy(gameObject, 0.5f);
         }
     }
     #endregion
@@ -91,6 +86,11 @@ public class HealthScript : MonoBehaviour
             {
                 rigidbody.linearVelocity = rigidbody.linearVelocity * m_SpeedMultiplierWhenHit;
                 rigidbody.angularVelocity = rigidbody.angularVelocity * m_SpeedMultiplierWhenHit;
+            }
+
+            if (m_CurrentHealth <= 0)
+            {
+                Destroy(gameObject, 0.25f);
             }
 
             StartCoroutine(InvincibleAfterHit());

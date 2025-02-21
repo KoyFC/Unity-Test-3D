@@ -12,8 +12,8 @@ public class WeaponData : ScriptableObject
     }
 
     [Header("Weapon")]
-    public string m_UniqueWeaponID;
-    public string m_WeaponName;
+    public string m_UniqueWeaponID = "generic_ID";
+    public string m_WeaponName = "Unnamed Weapon";
     [Tooltip("The sprite that will be displayed in the UI for this weapon.")]
     public Sprite m_WeaponSprite;
     [Tooltip("The amount of bullets the weapon can shoot before needing to reload.")]
@@ -23,7 +23,7 @@ public class WeaponData : ScriptableObject
     [Min(0)] public float m_ReloadTime = 1.5f;
 
     [Header("Firing")]
-    public FireMode m_FireMode;
+    public FireMode m_FireMode = FireMode.Automatic;
     [Tooltip("The time between each bullet being shot, or the cooldown in manual mode.")]
     [Min(0)]public float m_FireRate = 0.1f;
 
@@ -34,7 +34,7 @@ public class WeaponData : ScriptableObject
     [Min(0)] public float m_CooldownTime = 0.5f;
 
     [Header("Bullet")]
-    public GameObject m_BulletPrefab;
+    public GameObject m_BulletPrefab = null;
     public int m_BulletDamage = 10;
     public float m_BulletVelocity = 15f;
     public GameObject m_ImpactParticles;

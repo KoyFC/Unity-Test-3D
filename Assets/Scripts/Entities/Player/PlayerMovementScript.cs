@@ -8,22 +8,22 @@ using UnityEngine;
 public class PlayerMovementScript : MonoBehaviour
 {
     #region Variables
-    private Rigidbody m_Rigidbody;
-    private PlayerController m_PlayerController;
-    private Transform m_CameraTransform;
+    private Rigidbody m_Rigidbody = null;
+    private PlayerController m_PlayerController = null;
+    private Transform m_CameraTransform = null;
 
     [Header("Movement")]
     [SerializeField] private float m_WalkingSpeed = 6.5f;
     [SerializeField] private float m_RunningSpeedMultiplier = 2f;
-    private float m_CurrentSpeed;
+    private float m_CurrentSpeed = 0f;
 
     [Header("Jump")]
     [SerializeField] private float m_JumpForce = 8f;
     [SerializeField] private float m_CoyoteTime = 0.5f;
     [SerializeField] private float m_JumpBufferTime = 0.5f;
-    private bool m_CoyoteTimeActive;
-    private bool m_JumpBuffered;
-    private bool m_HasJumped;
+    private bool m_CoyoteTimeActive = true;
+    private bool m_JumpBuffered = false;
+    private bool m_HasJumped = false;
 
     [Header("Rotation")]
     [SerializeField] private float m_RotationSpeed = 40f;

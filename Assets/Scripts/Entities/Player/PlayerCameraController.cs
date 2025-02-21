@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerCameraController : MonoBehaviour
 {
     PlayerController m_PlayerController;
-    [SerializeField] CinemachineInputAxisController m_InputAxisController;
+    [SerializeField] CinemachineInputAxisController m_InputAxisController = null;
 
     void Start()
     {

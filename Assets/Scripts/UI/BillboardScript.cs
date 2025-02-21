@@ -8,12 +8,12 @@ public class BillboardScript : MonoBehaviour
         CameraForward 
     }
 
-    [SerializeField] private BillboardType m_BillboardType;
+    [SerializeField] private BillboardType m_BillboardType = BillboardType.CameraForward;
 
     [Header("Lock Rotation")]
-    [SerializeField] private bool m_LockX;
-    [SerializeField] private bool m_LockY;
-    [SerializeField] private bool m_LockZ;
+    [SerializeField] private bool m_LockX = false;
+    [SerializeField] private bool m_LockY = false;
+    [SerializeField] private bool m_LockZ = false;
 
     private Vector3 m_OriginalRotation;
 
@@ -36,7 +36,7 @@ public class BillboardScript : MonoBehaviour
             break;
         }
         
-        // Modifyingthe rotation in Euler space to lock certain dimensions.
+        // Modifying the rotation in Euler space to lock certain dimensions.
         Vector3 rotation = transform.rotation.eulerAngles;
         if (m_LockX) { rotation.x = m_OriginalRotation.x; }
         if (m_LockY) { rotation.y = m_OriginalRotation.y; }

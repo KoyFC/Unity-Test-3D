@@ -17,7 +17,7 @@ MonoBehaviour:
   m_WeaponSprite: {fileID: 502215926, guid: a8c146cca0fb52045b8cf26120b51ecd, type: 3}
   m_MagazineSize: 1
   m_MaxAmmo: 3
-  m_ReloadTime: 15
+  m_ReloadTime: 5
   m_FireMode: 0
   m_FireRate: 1
   m_BurstAmount: 3

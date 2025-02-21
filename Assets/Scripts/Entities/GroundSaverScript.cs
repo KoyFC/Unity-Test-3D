@@ -6,13 +6,13 @@ public class GroundSaverScript : MonoBehaviour
     [Header("Ground Saver Settings")]
     [SerializeField] private float m_SaveFrequency = 5.0f;
     [SerializeField] private bool m_SavePosition = true;
-    private bool m_KeepSaving;
-    private Vector3 m_LastGroundPosition;
+    private bool m_KeepSaving = true;
+    private Vector3 m_LastGroundPosition = Vector3.zero;
 
     [Header("Marker Settings")]
-    [SerializeField] private GameObject m_MarkerPrefab;
+    [SerializeField] private GameObject m_MarkerPrefab = null;
     [SerializeField] private bool m_SpawnMarker = false;
-    private GameObject m_LastPositionMarker;
+    private GameObject m_LastPositionMarker = null;
 
     public bool IsGrounded { get; private set; }
 

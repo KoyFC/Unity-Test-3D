@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerController : EntityController
 {
     #region Variables
-    internal PlayerMovementScript m_MovementScript;
+    internal PlayerMovementScript m_MovementScript = null;
     #endregion
 
     #region Helper Methods
