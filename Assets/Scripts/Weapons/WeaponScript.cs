@@ -119,7 +119,7 @@ public class WeaponScript : MonoBehaviour
             OnAmmoChanged?.Invoke();
         }
 
-        GameObject bullet = Instantiate(m_WeaponData.m_BulletPrefab, m_FirePoint.position, m_FirePoint.rotation);
+        GameObject bullet = BulletPoolManagerScript.Instance.GetBullet(m_WeaponData.m_BulletPrefab, transform);
 
         Vector3 parentVelocity = Vector3.zero;
         
@@ -128,8 +128,10 @@ public class WeaponScript : MonoBehaviour
             parentVelocity = rigidbody.linearVelocity;
         }
 
-        bullet.GetComponent<Rigidbody>().linearVelocity = parentVelocity + m_FirePoint.forward * m_WeaponData.m_BulletVelocity;
-        bullet.GetComponent<BulletScript>().m_Damage = m_WeaponData.m_BulletDamage;
+        BulletScript bulletScript = bullet.GetComponent<BulletScript>();
+
+        bulletScript.m_Rigidbody.linearVelocity = parentVelocity + m_FirePoint.forward * m_WeaponData.m_BulletVelocity;
+        bulletScript.m_Damage = m_WeaponData.m_BulletDamage;
     }
 
     private IEnumerator Reload()

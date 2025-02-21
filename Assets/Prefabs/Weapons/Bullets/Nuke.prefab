@@ -49,7 +49,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f9a8ff310c2fd341b2f50dd68660d09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_LifeTime: 20
+  m_Rigidbody: {fileID: 0}
+  m_AmmoUniqueID: generic_ID
+  m_LifeTime: 10
   m_DestroyOnHit: 0
 --- !u!114 &-4302243666259697827
 MonoBehaviour:
